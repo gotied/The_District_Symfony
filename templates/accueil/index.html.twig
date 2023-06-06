@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The District{% endblock %}
+
+{% block body %}
+
+{# <pre>
+    {{ dump(top6Categorie) }}
+</pre> #}
+{#<pre>
+    {{ dump(topcat6Result) }}
+</pre>#}
+<div class="d-flex flex-wrap justify-content-center" id="div-bar">
+  <form method="get" class="d-flex" role="search" id="search-bar" action="page_recherche.php">
+    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" id="search-bar-style" name="search">
+    <button class="btn" id="btn-search-style" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+    </svg></button>
+  </form>
+</div>
+
+<div class="d-flex flex-wrap justify-content-center" style="margin-top: 80px;">
+<h1 id="titre_h1">Catégorie les plus populaires</h1>
+</div>
+<div class="d-flex flex-wrap justify-content-center">
+
+{#{% for categorie in topcat6Result %}
+<div class="card text-bg-dark mt-5 pt-3 px-2 mx-5 col-3" style="width: 24rem; height: 30rem;" id="card-body">
+  <img src="{{asset('img/category/')}}{{ categorie.image }}" class="card-img-top" alt="{{ categorie.libelle }}" height="80%">
+  <div class="card-body">
+    <h5 class="card-title" id="card-text">{{ categorie.libelle }}</h5>
+    <a href="plats_par_categorie.php?id=<?= $categorie->id ?>" id="btn-style" class="btn">Voir les plats</a>
+  </div>
+</div>
+{% endfor %}#}
+</div>
+
+<div class="d-flex flex-wrap justify-content-center" style="margin-top: 100px;">
+<h1 id="titre_h1">Plats les plus vendus</h1>
+</div>
+<div class="d-flex flex-wrap justify-content-center">
+
+<?php foreach ($myPlat as $plat): ?>
+<div class="card text-bg-dark my-5 pt-3 px-2 mx-5 col-3" style="width: 18rem; height: 20rem;" id="card-body">
+  <img src="images_the_district/food/<?= $plat->image ?>" class="card-img-top" alt="<?= $plat->libelle ?>" height="70%">
+  <div class="card-body">
+    <h5 class="card-title" id="card-text"><?= $plat->libelle ?></h5>
+    <a href="commande.php?id=<?= $plat->id ?>" id="btn-style" class="btn">Commander</a>
+  </div>
+</div>
+<?php endforeach; ?>
+</div>
+{% endblock %}

@@ -1,0 +1,428 @@
+#card-body {
+    box-shadow: 17px 17px 4px 3px rgba(0,0,0,0.8);
+    -webkit-box-shadow: 17px 17px 4px 3px rgba(0,0,0,0.8);
+    -moz-box-shadow: 17px 17px 4px 3px rgba(0,0,0,0.8);
+}
+#card-body {
+    background: #fff url(https://img.freepik.com/photos-gratuite/texture-papier-blanc_1194-5416.jpg) center center/cover repeat;
+}
+#card-body2 {
+	background: #fff url(https://img.freepik.com/photos-gratuite/texture-papier-blanc_1194-5416.jpg) center center/cover repeat;
+}
+#card-body2 {
+    box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+}
+#body {
+    background: #fff url(https://img.freepik.com/photos-gratuite/fond-plancher-texture-bois-beige_53876-129605.jpg?w=2000) center center/contain repeat; 
+}
+#navbartop {
+    background: #fff url(https://img.freepik.com/photos-gratuite/fond-plancher-texture-bois-beige_53876-129605.jpg?w=2000) center center/cover no-repeat;
+}
+#navbarbot {
+    background: #fff url(https://img.freepik.com/photos-gratuite/fond-plancher-texture-bois-beige_53876-129605.jpg?w=2000) center center/contain repeat;
+}
+#card-text {
+    color: #771133; 
+	font-family: "Trebuchet MS", sans-serif;
+	text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+#div-bar {
+	 background: #771133 url(/img/hd-6305695_1920.jpg) center center/cover no-repeat;
+    padding-top: 210px;
+    padding-bottom: 225px;
+}
+#search-bar:hover {
+    width: 800px;
+}
+#search-bar {
+    width: 170px;
+    transition: width 2s linear 0s;
+}
+#titre_h1 {
+	animation: myAnimCat 1s ease 0s 1 normal none;	
+}
+@keyframes myAnimCat {
+	0% {
+		opacity: 0;
+		transform: translateX(-250px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+#titre_h1 {
+  	font-family: "Trebuchet MS", sans-serif;
+	  color: #771133;
+}
+#titre_h1 {
+	text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+#titre_h1-2 {
+	font-family: "Trebuchet MS", sans-serif;
+	color: #771133;
+}
+#titre_h1-2 {
+  text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+#nav-text-style {
+	font-family: "Trebuchet MS", sans-serif;
+	color: #771133;
+	font-weight: bold;
+	text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+#search-bar-style {
+	font-family: "Trebuchet MS", sans-serif;
+}
+#search-bar-style:hover {
+	cursor: grab;
+}
+#btn-style {
+  background-color: #771133;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 15px;
+  font-family: "Trebuchet MS", sans-serif;
+  cursor: pointer;
+}
+#btn-style-2 {
+	background-color: #771133;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+  }
+#btn-style-2:hover {
+	background-color: #ff0000;
+}
+#btn-style:hover {
+	background-color: #00d90b;
+}
+#btn-search-style {
+	background-color: #771133;
+	color: #fff;
+}
+#navbar-toggler-icon {
+	background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23771133' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+
+}
+#navbar-toggler {
+	border-color: #771133;
+  }
+#navbar-icon-social {
+	color: #771133;
+}
+#card-commande {
+	box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+}
+#card-commande {
+	background: #fff url(images_the_district/24382364_v602-nunoon-32-rippednotes.jpg) center center/cover no-repeat;
+}
+input[type="text"] {
+	background-color: #f2f2f2;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	color: #555;
+	font-size: 14px;
+	font-family: "Trebuchet MS", sans-serif;
+	padding: 10px;
+	width: 100%;
+  }
+  input[type="email"] {
+	background-color: #f2f2f2;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	color: #555;
+	font-size: 14px;
+	font-family: "Trebuchet MS", sans-serif;
+	padding: 10px;
+	width: 100%;
+  }
+  input[type="password"] {
+	background-color: #f2f2f2;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	color: #555;
+	font-size: 14px;
+	font-family: "Trebuchet MS", sans-serif;
+	padding: 10px;
+	width: 100%;
+  }
+  input[type="text"]:hover, textarea:hover {
+	border-color: #771133;
+  }
+  input[type="email"]:hover, textarea:hover {
+	border-color: #771133;
+  }
+  input[type="password"]:hover, textarea:hover {
+	border-color: #771133;
+  }
+  label, input[type="text"], textarea {
+	font-family: "Trebuchet MS", sans-serif;
+	color: #000000;
+	text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+  }
+  select {
+	background-color: #f2f2f2;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	color: #000000;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	margin-bottom: 10px;
+  }
+  #btn-disconnect {
+	background-image: url("images_the_district/person-dash.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	padding-right: 25px;
+	background-position-x: right;
+  }
+  #btn-disconnect {
+	background-color: #771133;
+	color: #ffffff;
+	border: none;
+	border-radius: 7px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+  }
+  #btn-disconnect:hover {
+	background-color: #ff0000;
+}
+#card-connexion {
+	background: #fff url(https://img.freepik.com/photos-gratuite/texture-papier-carre_23-2147786544.jpg) center center/cover no-repeat;
+	box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+}
+#card-inscription {
+	background: #fff url(https://cdn.pixabay.com/photo/2014/03/25/16/27/sheet-297179_960_720.png) center center/cover no-repeat;
+	box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);	
+}
+#liste-commande {
+	background-color: #771133;
+	color: #fff;
+	border: none;
+	border-radius: 15px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+  }
+  #btn-style-3 {
+	background-color: #771133;
+	color: #fff;
+	border: none;
+	border-radius: 15px;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+  }
+#btn-style-3:hover {
+	background-color: #0011ff;
+}
+#btn-style-4 {
+	background-color: #771133;
+	color: #fff;
+	border: none;
+	border-radius: 15px;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+  }
+#btn-style-4:hover {
+	background-color: #ff0000;
+}
+#btn-style-5 {
+	background-color: #002fff;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 12px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+  }
+#btn-style-5:hover {
+	background-color: #1eff00;
+}
+#btn-style-6 {
+	background-color: #001aff;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+  }
+#btn-style-6:hover {
+	background-color: #00a500;
+}
+#btn-style-7 {
+	background-color: #bb0000;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	text-decoration: none;
+	cursor: pointer;
+  }
+#btn-style-7:hover {
+	background-color: #00a500;
+}
+#liste-plat {
+	background-color: #771133;
+	color: #fff;
+	border: none;
+	border-radius: 15px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+}
+#liste-categorie {
+	background-color: #771133;
+	color: #fff;
+	border: none;
+	border-radius: 15px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+}
+#new-categorie {
+	background-color: #001aff;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+}
+#new-categorie:hover {
+	background-color: #00a500;
+}
+#btn-style-8 {
+	background-color: #0066ff;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+}
+#btn-style-8:hover {
+	background-color: #00a500;
+}
+#btn-style-9 {
+	background-color: #bb0000;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	text-decoration: none;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+}
+#btn-style-9:hover {
+	background-color: #00a500;
+}
+#liste-client {
+	background-color: #771133;
+	color: #fff;
+	border: none;
+	border-radius: 15px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+}
+#btn-gestion {
+	background-color: #771133;
+	color: #fff;
+	border: none;
+	border-radius: 15px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	text-decoration: none;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+}
+#logo-district {
+filter:drop-shadow(6px 8px 10px #000)	
+}
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+  }
