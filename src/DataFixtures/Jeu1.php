@@ -3,7 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Categorie;
+use App\Entity\Commande;
+use App\Entity\Detail;
 use App\Entity\Plat;
+use App\Entity\Utilisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -84,7 +87,66 @@ class Jeu1 extends Fixture
 
          $cat3->addPlat($plat4);
          $cat3->addPlat($plat5);
+
+         $commande1 = new Commande();
+         $commande1->setDateCommande(new \DateTime('2020-11-30'));
+         $commande1->setTotal(16.00);
+         $commande1->setEtat(3);
+
+         $manager->persist($commande1);
+
+         $commande2 = new Commande();
+         $commande2->setDateCommande(new \DateTime('2020-11-30'));
+         $commande2->setTotal(20.00);
+         $commande2->setEtat(3);
+
+         $manager->persist($commande2);
+
+         $detail1 = new Detail();
+         $detail1->setQuantite(4);
+         $detail1->setPlat($plat1);
+
+         $manager->persist($detail1);
+
+         $detail2 = new Detail();
+         $detail2->setQuantite(2);
+         $detail2->setPlat($plat2);
+
+         $manager->persist($detail2);
          
+         $user1 = new Utilisateur();
+         $user1->setEmail("thom@gmail.com'");
+         $user1->setPassword('$2y$10$TWHYciyjkxNSLb0HlHQ.d.TJc1DQfud4DRkD0Uiib5vPgzcwpdm4C');
+         $user1->setNom("Gilchrist");
+         $user1->setPrenom("Thomas");
+         $user1->setTelephone("7410001450");
+         $user1->setAdresse("1277 Sunburst Drive");
+         $user1->setCp("60002");
+         $user1->setVille("New-York");
+         $user1->setRoles("ROLE_CLIENT");
+
+         $manager->persist($user1);
+
+         $user2 = new Utilisateur();
+         $user2->setEmail("kelly@gmail.com");
+         $user2->setPassword('$2y$10$mRSaaZD2csvdgepVJrmHeez8e8DKWnmtOUN1/0VPn5EkJpBvfTg5.');
+         $user2->setNom("Dillard");
+         $user2->setPrenom("Kelly");
+         $user2->setTelephone("7896547800");
+         $user2->setAdresse("308 Post Avenue");
+         $user2->setCp("56000");
+         $user2->setVille("Dallas");
+         $user2->setRoles("ROLE_CLIENT");
+
+         $manager->persist($user2);
+
+         $commande1->addDetail($detail1);
+         $commande2->addDetail($detail2);
+
+         $user1->addCommande($commande1);
+         $user2->addCommande($commande2);
+
+
          $manager->flush();
     }
 }
