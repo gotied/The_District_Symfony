@@ -4,12 +4,10 @@
 
 {% block body %}
 
-{# <pre>
-    {{ dump(top6Categorie) }}
-</pre> #}
 {#<pre>
-    {{ dump(topcat6Result) }}
-</pre>#}
+    {{ dump(top6cat) }}
+</pre>#} 
+
 <div class="d-flex flex-wrap justify-content-center" id="div-bar">
   <form method="get" class="d-flex" role="search" id="search-bar" action="page_recherche.php">
     <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" id="search-bar-style" name="search">
@@ -24,7 +22,7 @@
 </div>
 <div class="d-flex flex-wrap justify-content-center">
 
-{#{% for categorie in topcat6Result %}
+{% for categorie in top6cat %}
 <div class="card text-bg-dark mt-5 pt-3 px-2 mx-5 col-3" style="width: 24rem; height: 30rem;" id="card-body">
   <img src="{{asset('img/category/')}}{{ categorie.image }}" class="card-img-top" alt="{{ categorie.libelle }}" height="80%">
   <div class="card-body">
@@ -32,7 +30,7 @@
     <a href="plats_par_categorie.php?id=<?= $categorie->id ?>" id="btn-style" class="btn">Voir les plats</a>
   </div>
 </div>
-{% endfor %}#}
+{% endfor %}
 </div>
 
 <div class="d-flex flex-wrap justify-content-center" style="margin-top: 100px;">
