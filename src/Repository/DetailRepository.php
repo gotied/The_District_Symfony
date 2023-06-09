@@ -63,4 +63,26 @@ class DetailRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function top6cat(): array
+{
+    $queryBuilder = $this->createQueryBuilder('d');
+
+    $queryBuilder
+        ->select('count(cmm.id) AS nbr_vente, c.libelle, c.image')
+        // ->from('App\Entity\Categorie', 'categorie')
+        ->leftJoin('d.plat', 'p')
+        ->leftJoin('p.categorie', 'c')
+        ->leftJoin('d.commande', 'cmm')
+        ->where('c.active = :active')
+        ->setParameter('active', true)
+        ->groupBy('p.id')
+        ->orderBy('nbr_vente', 'DESC')
+        ->setMaxResults(6);
+
+    $result = $queryBuilder->getQuery()->getResult();
+
+    // dd($result);
+    return $result;
+}
 }

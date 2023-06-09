@@ -7,6 +7,7 @@ use App\Entity\Plat;
 use App\Entity\Categorie;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -67,26 +68,25 @@ class CategorieRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function top6cat(): array
-    {
-        $entityManager = $this->getDoctrine()->getManager();
+    public function top6cat(EntityManagerInterface $entityManager): array
+{
+    $queryBuilder = $entityManager->createQueryBuilder();
 
-        $query = $entityManager->createQuery('
-        SELECT COALESCE(ventes.totalVentes, 0) AS nbrVente, cat.libelle, cat.image, cat.id
-        FROM App\Entity\Categorie cat
-        LEFT JOIN (
-            SELECT COUNT(*) AS totalVentes, p.idCategorie
-            FROM App\Entity\Commande c
-            JOIN App\Entity\Plat p WITH p.id = c.plat
-            GROUP BY p.idCategorie
-        ) AS ventes ON cat.id = ventes.idCategorie
-        WHERE cat.active = :active
-        ORDER BY nbrVente DESC
-        LIMIT 6');
+    $queryBuilder
+        ->select('COUNT(p.id) AS nbr_vente', 'categorie.libelle', 'categorie.image', 'categorie.id')
+        ->from('App\Entity\Categorie', 'categorie')
+        ->leftJoin('categorie.plats', 'p')
+        ->leftJoin('p.details', 'd')
+        ->leftJoin('d.commande', 'commande')
+        ->where('categorie.active = :active')
+        ->setParameter('active', 'true')
+        ->groupBy('p.id')
+        ->orderBy('nbr_vente', 'DESC')
+        ->setMaxResults(6);
 
-        $query->setParameter('active', 'yes');
+    $result = $queryBuilder->getQuery()->getResult();
 
-        $result = $query->getResult();
-        return $result;
-    }
+    dd($result);
+    return $result;
+}
 }
