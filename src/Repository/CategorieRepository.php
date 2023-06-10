@@ -68,7 +68,7 @@ class CategorieRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function top6cat(EntityManagerInterface $entityManager): array
+    /*public function top6cat(EntityManagerInterface $entityManager): array
 {
     $queryBuilder = $entityManager->createQueryBuilder();
 
@@ -88,5 +88,5 @@ class CategorieRepository extends ServiceEntityRepository
 
     dd($result);
     return $result;
-}
+}*/
 }
