@@ -3,9 +3,9 @@
 {% block title %}Catégorie{% endblock %}
 
 {% block body %}
-{# <pre>
+<pre>
     {{ dump(allcat) }}
-</pre> #}
+</pre>
 
 <div class="d-flex flex-wrap justify-content-center">
     {% set minC = 0 %}
@@ -27,7 +27,7 @@ foreach ($myPlat as $plat) {
             <img src="{{asset ('img/category/')}}{{ categorie.image }}" class="card-img-top" alt="{{ categorie.libelle }}" height="80%">
             <div class="card-body">
                 <h5 class="card-title" id="card-text">{{ categorie.libelle }}</h5>
-                {# <a href="plat_par_categorie.php?id=<?= $categorie->id ?>" id="btn-style" class="btn"><?= $count == 0 ? "Aucun plat (bientôt disponible !)" : "Voir " . ($count == 1 ? "le plat" : "les " . $count . " plat") . ($count > 1 ? "s" : "") ?></a> #}
+                <a href="{{ path('app_plat', {'id': categorie.id}) }}" id="btn-style" class="btn">Voir les plats</a>
             </div>
         </div>
     {% endfor %}

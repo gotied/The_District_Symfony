@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Plat;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @extends ServiceEntityRepository<Plat>
@@ -77,4 +78,20 @@ class PlatRepository extends ServiceEntityRepository
 
         return $result;  
     }
+
+    public function PlatParCat($id)
+{
+    $queryBuilder = $this->createQueryBuilder('p');
+    $queryBuilder
+        ->join('p.categorie', 'c')
+        ->where('c.id = :id')
+        ->setParameter('id', $id)
+        ->orderBy('p.id', 'ASC');
+
+    $query = $queryBuilder->getQuery();
+    $result = $query->getResult();
+
+    return $result;
+}
+
 }

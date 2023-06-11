@@ -69,7 +69,7 @@ public function top6cat(): array
     $queryBuilder = $this->createQueryBuilder('d');
 
     $queryBuilder
-        ->select('count(cmm.id) AS nbr_vente, c.libelle, c.image')
+        ->select('count(cmm.id) AS nbr_vente, c.id, c.libelle, c.image')
         ->leftJoin('d.plat', 'p')
         ->leftJoin('p.categorie', 'c')
         ->leftJoin('d.commande', 'cmm')

@@ -4,13 +4,13 @@
 
 {% block body %}
 
-<pre>
+{# <pre>
     {{dump(top6cat)}}
 </pre> 
 
 <pre>
 {{dump(top3plat)}}
-</pre>
+</pre> #}
 
 <div class="d-flex flex-wrap justify-content-center" id="div-bar">
   <form method="get" class="d-flex" role="search" id="search-bar" action="page_recherche.php">
@@ -31,7 +31,7 @@
   <img src="{{asset('img/category/')}}{{ categorie.image }}" class="card-img-top" alt="{{ categorie.libelle }}" height="80%">
   <div class="card-body">
     <h5 class="card-title" id="card-text">{{ categorie.libelle }}</h5>
-    {# <a href="plats_par_categorie.php?id=<?= $categorie->id ?>" id="btn-style" class="btn">Voir les plats</a> #}
+    <a href="{{ path('app_plat', {'id': categorie.id}) }}" id="btn-style" class="btn">Voir les plats</a>
   </div>
 </div>
 {% endfor %}
