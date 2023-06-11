@@ -68,7 +68,7 @@
 #titre_h1-2 {
   text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
 }
-#nav-text-style {
+.nav-link {
 	font-family: "Trebuchet MS", sans-serif;
 	color: #771133;
 	font-weight: bold;
