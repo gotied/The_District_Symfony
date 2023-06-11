@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plat{% endblock %}
+
+{% block body %}
+{# <pre>
+    {{ dump(allplat) }}
+</pre> #}
+
+<div class="d-flex flex-wrap justify-content-center">
+    {% set minP = 0 %}
+    {% if app.request.query.has('minP') %}
+        {% set minP = app.request.query.get('minP')|default(0) %}
+    {% endif %}
+    {% set maxP = 6 %}
+    {% set plats = allplat|slice(minP, maxP) %}
+    {% for plat in plats %}
+        <div class="card text-bg-dark my-5 pt-3 px-2 mx-5 col-3" style="width: 24rem;" id="card-body">
+            <img src="{{asset ('img/food/')}}{{ plat.image }}" class="card-img-top" alt="{{ plat.libelle }}">
+            <div class="card-body">
+                <h5 class="card-title" id="card-text">{{ plat.libelle }}</h5>
+                <p class="card-text" id="card-text">{{ plat.description }}<br><br>Prix : {{ plat.prix }}€</p>
+                    {# <a href="commande.php?id={{ plat.id }}" id="btn-style" class="btn btn-primary">Commander</a> #}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% if allplat|length > minP + maxP %}
+    <div style="margin-top : 80px;">
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" id="btn-style" href="{{ path('app_plat', {'minP': minP + maxP}) }}">Suivant</a>
+            </li>
+        </ul>
+    </div>
+{% endif %}
+{% set pre = minP - maxP %}
+{% if pre >= 0 %}
+    <div style="margin-top : 80px;">
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" id="btn-style" href="{{ path('app_plat', {'offset': pre}) }}">Précédent</a>
+            </li>
+        </ul>
+    </div>
+{% endif %}
+{% endblock %}

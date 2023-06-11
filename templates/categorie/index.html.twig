@@ -3,39 +3,53 @@
 {% block title %}Catégorie{% endblock %}
 
 {% block body %}
-<pre>
+{# <pre>
     {{ dump(allcat) }}
-</pre>
+</pre> #}
 
 <div class="d-flex flex-wrap justify-content-center">
-
-{# <?php if (count($myCategorie) > 6 ): ?>   
-<?php $myCategorie = array_slice($myCategorie, 0, 6); ?>
-<?php endif; ?>
-<?php foreach ($myCategorie as $categorie): ?>
-<?php
+    {% set minC = 0 %}
+    {% if app.request.query.has('minC') %}
+        {% set minC = app.request.query.get('minC')|default(0) %}
+    {% endif %}
+    {% set maxC = 6 %}
+    {% set cat = allcat|slice(minC, maxC) %}
+{# <?php
 $count = 0; 
 foreach ($myPlat as $plat) {
       if ($plat->id_categorie == $categorie->id) {
         $count++;
       }
-    }
+    } 
 ?> #}
-{% for cat in allcat %}
-<div class="card text-bg-dark mt-5 pt-3 px-2 mx-5 col-3" style="width: 24rem; height: 29rem;" id="card-body">
-    <img src="{{asset ('img/category/')}}{{ cat.image }}" class="card-img-top" alt="{{ cat.libelle }}" height="80%">
-    <div class="card-body">
-      <h5 class="card-title" id="card-text">{{ cat.libelle }}</h5>
-      {# <a href="plats_par_categorie.php?id=<?= $categorie->id ?>" id="btn-style" class="btn"><?= $count == 0 ? "Aucun plat (bientôt disponible !)" : "Voir " . ($count == 1 ? "le plat" : "les " . $count . " plat") . ($count > 1 ? "s" : "") ?></a> #}
+    {% for categorie in cat %}
+        <div class="card text-bg-dark mt-5 pt-3 px-2 mx-5 col-3" style="width: 24rem; height: 29rem;" id="card-body">
+            <img src="{{asset ('img/category/')}}{{ categorie.image }}" class="card-img-top" alt="{{ categorie.libelle }}" height="80%">
+            <div class="card-body">
+                <h5 class="card-title" id="card-text">{{ categorie.libelle }}</h5>
+                {# <a href="plat_par_categorie.php?id=<?= $categorie->id ?>" id="btn-style" class="btn"><?= $count == 0 ? "Aucun plat (bientôt disponible !)" : "Voir " . ($count == 1 ? "le plat" : "les " . $count . " plat") . ($count > 1 ? "s" : "") ?></a> #}
+            </div>
+        </div>
+    {% endfor %}
+</div> 
+
+{% if allcat|length > minC + maxC %}
+    <div style="margin-top : 100px;">
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" id="btn-style" href="{{ path('app_categorie', {'minC': minC + maxC}) }}">Suivant</a>
+            </li>
+        </ul>
     </div>
-</div>
-{% endfor %}
-</div>
-{# <div style="margin-top : 100px;">
-<ul class="nav nav-pills justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link active" id="btn-style" href="categories2.php">Suivant</a>
-  </li>
-</ul> 
-</div> #}
+{% endif %}
+{% set pre = minC - maxC %}
+{% if pre >= 0 %}
+    <div style="margin-top : 100px;">
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" id="btn-style" href="{{ path('app_categorie', {'offset': pre}) }}">Précédent</a>
+            </li>
+        </ul>
+    </div>
+{% endif %}
 {% endblock %}

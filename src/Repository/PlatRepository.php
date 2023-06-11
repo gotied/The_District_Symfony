@@ -63,4 +63,18 @@ class PlatRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function allplat()
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder
+            ->where('p.active = :active')
+            ->setParameter('active', true)
+            ->orderBy('p.id', 'ASC');
+
+        $query = $queryBuilder->getQuery();
+        $result = $query->getResult();
+
+        return $result;  
+    }
 }

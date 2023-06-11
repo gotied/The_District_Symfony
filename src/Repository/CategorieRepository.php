@@ -74,8 +74,8 @@ class CategorieRepository extends ServiceEntityRepository
         $queryBuilder
             ->where('c.active = :active')
             ->setParameter('active', true)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(6);
+            ->orderBy('c.id', 'ASC');
+            //->setMaxResults(6);
 
         $query = $queryBuilder->getQuery();
         $result = $query->getResult();
