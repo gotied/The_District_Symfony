@@ -18,14 +18,16 @@ class AccueilController extends AbstractController
             'controller_name' => 'AccueilController',
         ]);
     }
+    
     #[Route('/accueil', name: 'app_accueil')]
-    public function top6cat(DetailRepository $detailRepo, CategorieRepository $cat, EntityManagerInterface $entityManager)
+    public function top(DetailRepository $detailRepo)
     {
-        // $top6cat = $cat->top6cat($entityManager);
         $top6cat = $detailRepo->top6cat();
+        $top3plat = $detailRepo->top3plat();
 
         return $this->render('accueil/index.html.twig', [
             'top6cat' => $top6cat,
+            'top3plat' => $top3plat,
         ]);
     }
 }

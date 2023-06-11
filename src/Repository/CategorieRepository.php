@@ -67,26 +67,4 @@ class CategorieRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-
-    /*public function top6cat(EntityManagerInterface $entityManager): array
-{
-    $queryBuilder = $entityManager->createQueryBuilder();
-
-    $queryBuilder
-        ->select('COUNT(p.id) AS nbr_vente', 'categorie.libelle', 'categorie.image', 'categorie.id')
-        ->from('App\Entity\Categorie', 'categorie')
-        ->leftJoin('categorie.plats', 'p')
-        ->leftJoin('p.details', 'd')
-        ->leftJoin('d.commande', 'commande')
-        ->where('categorie.active = :active')
-        ->setParameter('active', 'true')
-        ->groupBy('p.id')
-        ->orderBy('nbr_vente', 'DESC')
-        ->setMaxResults(6);
-
-    $result = $queryBuilder->getQuery()->getResult();
-
-    dd($result);
-    return $result;
-}*/
 }

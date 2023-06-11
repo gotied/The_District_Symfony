@@ -70,7 +70,6 @@ public function top6cat(): array
 
     $queryBuilder
         ->select('count(cmm.id) AS nbr_vente, c.libelle, c.image')
-        // ->from('App\Entity\Categorie', 'categorie')
         ->leftJoin('d.plat', 'p')
         ->leftJoin('p.categorie', 'c')
         ->leftJoin('d.commande', 'cmm')
@@ -83,6 +82,23 @@ public function top6cat(): array
     $result = $queryBuilder->getQuery()->getResult();
 
     // dd($result);
+    return $result;
+}
+
+public function top3plat(): array {
+    $queryBuilder = $this->createQueryBuilder('d');
+
+    $queryBuilder
+        ->select('count(p.id) AS nbr_vente, p.libelle, p.image')
+        ->leftJoin('d.plat', 'p')
+        ->leftJoin('d.commande', 'c')
+        ->where('c.etat = :etat')
+        ->setParameter('etat', 3)
+        ->groupBy('p.id')
+        ->orderBy('nbr_vente', 'DESC')
+        ->setMaxResults(3);
+
+    $result = $queryBuilder->getQuery()->getResult();
     return $result;
 }
 }
