@@ -75,7 +75,7 @@ public function top6cat(): array
         ->leftJoin('d.commande', 'cmm')
         ->where('c.active = :active')
         ->setParameter('active', true)
-        ->groupBy('p.id')
+        ->groupBy('c.id')
         ->orderBy('nbr_vente', 'DESC')
         ->setMaxResults(6);
 

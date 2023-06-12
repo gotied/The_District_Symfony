@@ -229,11 +229,17 @@ class Jeu1 extends Fixture
         $commande9->setEtat(3);
         $manager->persist($commande9);
 
-        /*$commande10 = new Commande();
+        $commande10 = new Commande();
         $commande10->setDateCommande(new \DateTime('2022-06-15'));
-        $commande10->setTotal(8.00);
+        $commande10->setTotal(7.00);
         $commande10->setEtat(3);
-        $manager->persist($commande10);*/
+        $manager->persist($commande10);
+
+        $commande11 = new Commande();
+        $commande11->setDateCommande(New \DateTime('2022-05-11'));
+        $commande11->setTotal(8.00);
+        $commande11->setEtat(3);
+        $manager->persist($commande11);
 
         // Détail //
         $detail1 = new Detail();
@@ -286,6 +292,15 @@ class Jeu1 extends Fixture
         $detail10->setPlat($plat2);
         $manager->persist($detail10);
 
+        $detail11 = new Detail();
+        $detail11->setQuantite(1);
+        $detail11->setPlat($plat9);
+        $manager->persist($detail11);
+
+        $detail12 = new Detail();
+        $detail12->setQuantite(1);
+        $detail12->setPlat($plat11);
+        $manager->persist($detail12);
 
         // Utilisateur //
         $user1 = new Utilisateur();
@@ -395,33 +410,7 @@ class Jeu1 extends Fixture
         $user8->setCp("");
         $user8->setVille("");
         $user8->setRoles("");
-        $manager->persist($user8);
-
-        $user9 = new Utilisateur();
-        $user9->setEmail("");
-        $user9->setPassword('');
-        $user9->setNom("");
-        $user9->setPrenom("");
-        $user9->setTelephone("");
-        $user9->setAdresse("");
-        $user9->setCp("");
-        $user9->setVille("");
-        $user9->setRoles("");
-        $manager->persist($user9);
-
-        $user10 = new Utilisateur();
-        $user10->setEmail("");
-        $user10->setPassword('');
-        $user10->setNom("");
-        $user10->setPrenom("");
-        $user10->setTelephone("");
-        $user10->setAdresse("");
-        $user10->setCp("");
-        $user10->setVille("");
-        $user10->setRoles("");
-        $manager->persist($user10);*/
-
-
+        $manager->persist($user8);*/
 
         $commande1->addDetail($detail1);
         $commande2->addDetail($detail2);
@@ -433,13 +422,17 @@ class Jeu1 extends Fixture
         $commande8->addDetail($detail8);
         $commande9->addDetail($detail9);
         $commande9->addDetail($detail10);
+        $commande10->addDetail($detail11);
+        $commande11->addDetail($detail12);
 
         $user1->addCommande($commande2);
         $user2->addCommande($commande1);
         $user2->addCommande($commande9);
         $user3->addCommande($commande3);
         $user4->addCommande($commande4);
+        $user4->addCommande($commande11);
         $user5->addCommande($commande5);
+        $user5->addCommande($commande10);
         $user6->addCommande($commande6);
         $user6->addCommande($commande8);
         $user7->addCommande($commande7);
