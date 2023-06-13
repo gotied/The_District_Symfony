@@ -15,7 +15,7 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $object = null;
+    private ?string $objet = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
@@ -28,14 +28,14 @@ class Contact
         return $this->id;
     }
 
-    public function getObject(): ?string
+    public function getObjet(): ?string
     {
-        return $this->object;
+        return $this->objet;
     }
 
-    public function setObject(string $object): self
+    public function setObjet(string $objet): self
     {
-        $this->object = $object;
+        $this->objet = $objet;
 
         return $this;
     }

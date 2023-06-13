@@ -11,13 +11,13 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PanierController extends AbstractController
 {
-    #[Route('/panier', name: 'app_panier')]
-    public function index(): Response
-    {
-        return $this->render('panier/index.html.twig', [
-            'controller_name' => 'PanierController',
-        ]);
-    }
+    // #[Route('/panier', name: 'app_panier')]
+    // public function index(): Response
+    // {
+    //     return $this->render('panier/index.html.twig', [
+    //         'controller_name' => 'PanierController',
+    //     ]);
+    // }
 
     private $panierService;
 
@@ -29,8 +29,8 @@ class PanierController extends AbstractController
     #[Route('/panier/ajout/{id}', name: 'panier_ajout')]
     public function ajouterPlat(Request $request, int $id): Response
     {
-       /* $this->panierService->ajouterPlat($id);
-        return new Response('Plat ajouté au panier.');*/
+       $this->panierService->ajouterPlat($id);
+         return new Response('Plat ajouté au panier.');
         dd($id);
     }
 
