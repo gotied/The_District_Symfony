@@ -48,7 +48,7 @@
   <img src="{{asset('img/food/')}}{{plat.image}}" class="card-img-top" alt="{{plat.libelle}}" height="70%">
   <div class="card-body">
     <h5 class="card-title" id="card-text">{{plat.libelle}}</h5>
-    {# <a href="commande.php?id=<?= $plat->id ?>" id="btn-style" class="btn">Commander</a> #}
+    <a href="{{ path('panier_ajout', { 'id': plat.id }) }}">Ajouter au panier</a>
   </div>
 </div>
 {% endfor %}
