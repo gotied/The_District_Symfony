@@ -21,7 +21,6 @@ class Jeu1 extends Fixture
         $cat1->setActive(true);
         $manager->persist($cat1);
 
-
         $cat2 = new Categorie();
         $cat2->setLibelle("Burger");
         $cat2->setImage("burger_cat.jpg");
@@ -74,7 +73,6 @@ class Jeu1 extends Fixture
         $plat1->setActive(true);
         $manager->persist($plat1);
 
-
         $plat2 = new Plat();
         $plat2->setLibelle("District Burger");
         $plat2->setDescription("Burger composé d’un bun’s du boulanger, deux steaks de 80g (origine française), de deux tranches poitrine de porc fumée, de deux tranches cheddar affiné, salade et oignons confits.");
@@ -82,7 +80,6 @@ class Jeu1 extends Fixture
         $plat2->setImage("hamburger.jpg");
         $plat2->setActive(true);
         $manager->persist($plat2);
-
 
         $plat3 = new Plat();
         $plat3->setLibelle("Cheeseburger");
@@ -92,7 +89,6 @@ class Jeu1 extends Fixture
         $plat3->setActive(true);
         $manager->persist($plat3);
 
-
         $plat4 = new Plat();
         $plat4->setLibelle("Lasagnes");
         $plat4->setDescription("Découvrez notre recette des lasagnes, l'une des spécialités italiennes que tout le monde aime avec sa viande hachée et gratinée à l'emmental. Et bien sûr, une inoubliable béchamel à la noix de muscade.");
@@ -100,7 +96,6 @@ class Jeu1 extends Fixture
         $plat4->setImage("lasagnes_viande.jpg");
         $plat4->setActive(true);
         $manager->persist($plat4);
-
 
         $plat5 = new Plat();
         $plat5->setLibelle("Tagliatelles au saumon");
@@ -110,7 +105,6 @@ class Jeu1 extends Fixture
         $plat5->setActive(true);
         $manager->persist($plat5);
 
-
         $plat6 = new Plat();
         $plat6->setLibelle("Buffalo Chicken Wrap");
         $plat6->setDescription("Du bon filet de poulet mariné dans notre spécialité sucrée & épicée, enveloppé dans une tortilla blanche douce faite maison.");
@@ -118,7 +112,6 @@ class Jeu1 extends Fixture
         $plat6->setImage("buffalo-chicken.jpg");
         $plat6->setActive(true);
         $manager->persist($plat6);
-
 
         $plat8 = new Plat();
         $plat8->setLibelle("Spaghetti aux légumes");
@@ -128,7 +121,6 @@ class Jeu1 extends Fixture
         $plat8->setActive(true);
         $manager->persist($plat8);
 
-
         $plat9 = new Plat();
         $plat9->setLibelle("Salade César");
         $plat9->setDescription("Une délicieuse salade Caesar (César) composée de filets de poulet grillés, de feuilles croquantes de salade romaine, de croutons à l'ail, de tomates cerise et surtout de sa fameuse sauce Caesar. Le tout agrémenté de copeaux de parmesan.");
@@ -137,7 +129,6 @@ class Jeu1 extends Fixture
         $plat9->setActive(true);
         $manager->persist($plat9);
 
-
         $plat10 = new Plat();
         $plat10->setLibelle("Pizza Margherita");
         $plat10->setDescription("Une authentique pizza margarita, un classique de la cuisine italienne! Une pâte faite maison, une sauce tomate fraîche, de la mozzarella Fior di latte, du basilic, origan, ail, sucre, sel & poivre...");
@@ -145,7 +136,6 @@ class Jeu1 extends Fixture
         $plat10->setImage("pizza-margherita.jpg");
         $plat10->setActive(true);
         $manager->persist($plat10);
-
 
         $plat11 = new Plat();
         $plat11->setLibelle("Courgettes farcies au quinoa et duxelles de champignons");
@@ -173,13 +163,11 @@ class Jeu1 extends Fixture
         $commande1->setEtat(3);
         $manager->persist($commande1);
 
-
         $commande2 = new Commande();
         $commande2->setDateCommande(new \DateTime('2020-11-30'));
         $commande2->setTotal(28.00);
         $commande2->setEtat(3);
         $manager->persist($commande2);
-
 
         $commande3 = new Commande();
         $commande3->setDateCommande(new \DateTime('2021-05-04'));
@@ -429,7 +417,6 @@ class Jeu1 extends Fixture
         $user6->addCommande($commande8);
         $user7->addCommande($commande7);
         $user8->addCommande($commande11);
-
 
         $manager->flush();
     }
