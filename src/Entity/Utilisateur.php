@@ -5,10 +5,11 @@ namespace App\Entity;
 use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur
+class Utilisateur implements UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -69,8 +70,7 @@ class Utilisateur
 
     public function setPassword(string $password): self
     {
-        $this->password = $password;
-
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
         return $this;
     }
 
@@ -146,9 +146,9 @@ class Utilisateur
         return $this;
     }
 
-    public function getRoles(): ?string
+    public function getRoles(): array
     {
-        return $this->roles;
+        return [$this->roles];
     }
 
     public function setRoles(string $roles): self
@@ -188,5 +188,16 @@ class Utilisateur
         }
 
         return $this;
+    }
+
+    public function eraseCredentials()
+    {
+        // Supprimez les données sensibles de l'utilisateur si nécessaire
+        // Par exemple, réinitialisez un éventuel jeton d'authentification
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->email;
     }
 }

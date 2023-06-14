@@ -219,7 +219,7 @@ class Jeu1 extends Fixture
 
         $commande9 = new Commande();
         $commande9->setDateCommande(new \DateTime('2022-06-15'));
-        $commande9->setTotal(13);
+        $commande9->setTotal(13.00);
         $commande9->setEtat(3);
         $manager->persist($commande9);
 
@@ -298,8 +298,8 @@ class Jeu1 extends Fixture
 
         // Utilisateur //
         $user1 = new Utilisateur();
-        $user1->setEmail("thom@gmail.com'");
-        $user1->setPassword('$2y$10$TWHYciyjkxNSLb0HlHQ.d.TJc1DQfud4DRkD0Uiib5vPgzcwpdm4C');
+        $user1->setEmail("thom@gmail.com");
+        $user1->setPassword('test1');
         $user1->setNom("Gilchrist");
         $user1->setPrenom("Thomas");
         $user1->setTelephone("7410001450");
@@ -309,10 +309,9 @@ class Jeu1 extends Fixture
         $user1->setRoles("ROLE_CLIENT");
         $manager->persist($user1);
 
-
         $user2 = new Utilisateur();
         $user2->setEmail("kelly@gmail.com");
-        $user2->setPassword('$2y$10$mRSaaZD2csvdgepVJrmHeez8e8DKWnmtOUN1/0VPn5EkJpBvfTg5.');
+        $user2->setPassword('test2');
         $user2->setNom("Dillard");
         $user2->setPrenom("Kelly");
         $user2->setTelephone("7896547800");
@@ -322,77 +321,77 @@ class Jeu1 extends Fixture
         $user2->setRoles("ROLE_CLIENT");
         $manager->persist($user2);
 
-        $user2 = new Utilisateur();
-        $user2->setEmail("martha@gmail.com");
-        $user2->setPassword('$2y$10$526gTtiiTb2Zq5yuLopWleWf/G4fdmqHRQrcO1t1EZChv44MqIXIe');
-        $user2->setNom("Woods");
-        $user2->setPrenom("Martha");
-        $user2->setTelephone("78540001200");
-        $user2->setAdresse("478 Avenue Street");
-        $user2->setCp("696969");
-        $user2->setVille("Mont-Cuq");
-        $user2->setRoles("ROLE_CLIENT");
-        $manager->persist($user2);
-
         $user3 = new Utilisateur();
-        $user3->setEmail("charlie@gmail.com");
-        $user3->setPassword('$2y$10$hZzBoXLkiK4LKQr8gdFeLuw7Ta/M/RH8jqtZqfsE5kR8RhBqBY.eW');
-        $user3->setNom("Danger");
-        $user3->setPrenom("Charlie");
-        $user3->setTelephone("7458965550");
-        $user3->setAdresse("3140 Bartlett Avenue");
-        $user3->setCp("93000");
-        $user3->setVille("Paris");
+        $user3->setEmail("martha@gmail.com");
+        $user3->setPassword('test3');
+        $user3->setNom("Woods");
+        $user3->setPrenom("Martha");
+        $user3->setTelephone("78540001200");
+        $user3->setAdresse("478 Avenue Street");
+        $user3->setCp("696969");
+        $user3->setVille("Mont-Cuq");
         $user3->setRoles("ROLE_CLIENT");
         $manager->persist($user3);
 
         $user4 = new Utilisateur();
-        $user4->setEmail("hedley@gmail.com");
-        $user4->setPassword('$2y$10$Vj6TfRvxTauSJ.8Rslqneu15AP0iIXe9jnPeOzyJdJUTl33bRkVu6');
-        $user4->setNom("Hedley");
-        $user4->setPrenom("Claudia");
-        $user4->setTelephone("7451114400");
-        $user4->setAdresse("1119 Kinney Street");
-        $user4->setCp("76600");
-        $user4->setVille("No-Where");
+        $user4->setEmail("charlie@gmail.com");
+        $user4->setPassword('test4');
+        $user4->setNom("Danger");
+        $user4->setPrenom("Charlie");
+        $user4->setTelephone("7458965550");
+        $user4->setAdresse("3140 Bartlett Avenue");
+        $user4->setCp("93000");
+        $user4->setVille("Paris");
         $user4->setRoles("ROLE_CLIENT");
         $manager->persist($user4);
 
         $user5 = new Utilisateur();
-        $user5->setEmail("venno@gmail.com");
-        $user5->setPassword('$2y$10$AbRbj2qFxrW887rEAJMWAuggGdOPlq5IrsebxgyyZ6EknDvKRXPaq');
-        $user5->setNom("Vargas");
-        $user5->setPrenom("Vernon");
-        $user5->setTelephone("7414744440");
-        $user5->setAdresse("1234 Hazelwood Avenue");
-        $user5->setCp("90100");
-        $user5->setVille("HazelCity");
+        $user5->setEmail("hedley@gmail.com");
+        $user5->setPassword('test5');
+        $user5->setNom("Hedley");
+        $user5->setPrenom("Claudia");
+        $user5->setTelephone("7451114400");
+        $user5->setAdresse("1119 Kinney Street");
+        $user5->setCp("76600");
+        $user5->setVille("No-Where");
         $user5->setRoles("ROLE_CLIENT");
         $manager->persist($user5);
 
         $user6 = new Utilisateur();
-        $user6->setEmail("carlos@gmail.com");
-        $user6->setPassword('$2y$10$/u.8rJ/pO4piyujXqzEX6uDzs6awS9N0NqPnZuJ3GfUG8fFRQVaR.');
-        $user6->setNom("Grayson");
-        $user6->setPrenom("Carlos");
-        $user6->setTelephone("7401456980");
-        $user6->setAdresse("2969 Hartland Avenue");
-        $user6->setCp("000000");
-        $user6->setVille("ZombieLand");
+        $user6->setEmail("venno@gmail.com");
+        $user6->setPassword('test6');
+        $user6->setNom("Vargas");
+        $user6->setPrenom("Vernon");
+        $user6->setTelephone("7414744440");
+        $user6->setAdresse("1234 Hazelwood Avenue");
+        $user6->setCp("90100");
+        $user6->setVille("HazelCity");
         $user6->setRoles("ROLE_CLIENT");
         $manager->persist($user6);
 
         $user7 = new Utilisateur();
-        $user7->setEmail("jonathan@gmail.com");
-        $user7->setPassword('$2y$10$GA/.tL0ZbHf7qPOgMGcN3uGbUXtjp.UpWF8.XXc2aaxmp5bqYkf3e');
-        $user7->setNom("Caudill");
-        $user7->setPrenom("Jonathan");
-        $user7->setTelephone("7410256996");
-        $user7->setAdresse("1959 Limer Street");
-        $user7->setCp("9591");
-        $user7->setVille("Remil");
+        $user7->setEmail("carlos@gmail.com");
+        $user7->setPassword('test7');
+        $user7->setNom("Grayson");
+        $user7->setPrenom("Carlos");
+        $user7->setTelephone("7401456980");
+        $user7->setAdresse("2969 Hartland Avenue");
+        $user7->setCp("000000");
+        $user7->setVille("ZombieLand");
         $user7->setRoles("ROLE_CLIENT");
         $manager->persist($user7);
+
+        $user8 = new Utilisateur();
+        $user8->setEmail("jonathan@gmail.com");
+        $user8->setPassword('test8');
+        $user8->setNom("Caudill");
+        $user8->setPrenom("Jonathan");
+        $user8->setTelephone("7410256996");
+        $user8->setAdresse("1959 Limer Street");
+        $user8->setCp("9591");
+        $user8->setVille("Remil");
+        $user8->setRoles("ROLE_CLIENT");
+        $manager->persist($user8);
 
         /*$user8 = new Utilisateur();
         $user8->setEmail("");
@@ -424,12 +423,12 @@ class Jeu1 extends Fixture
         $user2->addCommande($commande9);
         $user3->addCommande($commande3);
         $user4->addCommande($commande4);
-        $user4->addCommande($commande11);
         $user5->addCommande($commande5);
         $user5->addCommande($commande10);
         $user6->addCommande($commande6);
         $user6->addCommande($commande8);
         $user7->addCommande($commande7);
+        $user8->addCommande($commande11);
 
 
         $manager->flush();
