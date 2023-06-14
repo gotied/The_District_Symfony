@@ -167,6 +167,20 @@ input[type="text"] {
 	padding: 10px;
 	width: 100%;
   }
+  #contact_form_message {
+	background-color: #f2f2f2;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	color: #555;
+	font-size: 14px;
+	font-family: "Trebuchet MS", sans-serif;
+	padding: 10px;
+	width: 100%;
+  }
+  #contact_form_message:hover{
+	border-color: #771133;
+  }
   input[type="text"]:hover, textarea:hover {
 	border-color: #771133;
   }
@@ -180,6 +194,22 @@ input[type="text"] {
 	font-family: "Trebuchet MS", sans-serif;
 	color: #000000;
 	text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+  }
+  #contact_form_save{
+	background-color: #771133;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size: 15px;
+  font-family: "Trebuchet MS", sans-serif;
+  cursor: pointer;
+  }
+  #contact_form_save:hover{
+	background-color: #00d90b;
   }
   select {
 	background-color: #f2f2f2;

@@ -32,6 +32,9 @@ class ContactController extends AbstractController
             //on stocke les données récupérées dans la variable $message
             $message = $data;
 
+            $entityManager->persist($message);
+            $entityManager->flush();
+            
             // $email = (new TemplatedEmail())
             // ->from('admin@the_district.fr')
             // ->to(new Address($data->getEmail()))
@@ -45,12 +48,6 @@ class ContactController extends AbstractController
             $message = $message->getMessage();
 
             $email = $ms->sendMail($mailer, $expediteur, $destinataire, $sujet, $message);
-
-
-            // $entityManager->persist($message);
-            // $entityManager->flush();
-
-
 
             // Redirection vers accueil
             return $this->redirectToRoute('app_accueil');

@@ -3,27 +3,20 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-    <div class="row text-center">
-
+ <div class="d-flex flex-wrap justify-content-center">
+<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 30rem;" id="card-inscription">
+<div class="card-body">
+<h5 class="card-title" id="card-text">Contactez-nous :</h5>
+<p class="card-text">
     {{ form_start(form) }}
-    <div class="my-custom-class-for-errors">
-        {{ form_errors(form) }}
-    </div>
-
-    <div class="row">
-        <div class="col-9 mx-auto mb-2 mt-4">
-            {{ form_label(form.objet, "Objet") }}
-             {{ form_widget(form.objet, {'attr': {'class': 'btn-light'} }) }}
-             {{ form_errors(form.objet) }}
-        </div>
-        <div class="col-9 mx-auto mb-2">
             {{ form_row(form.email) }}
-        </div>
-        <div class="col-9 mx-auto mb-2">
-            {{ form_row(form.message) }}
-        </div>
 
-    </div>
+            {{ form_row(form.objet) }}
+
+            {{ form_row(form.message) }}
     {{ form_end(form) }}
+</p>
+  </div>
+</div>
 </div>
 {% endblock %}
