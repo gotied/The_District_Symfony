@@ -32,8 +32,8 @@ class Jeu1 extends Fixture
         $cat3->setLibelle("Pasta");
         $cat3->setImage("pasta_cat.jpg");
         $cat3->setActive(true);
-
         $manager->persist($cat3);
+
 
         $cat4 = new Categorie();
         $cat4->setLibelle("Wraps");
@@ -155,21 +155,15 @@ class Jeu1 extends Fixture
         $plat11->setActive(true);
         $manager->persist($plat11);
 
-
         $cat1->addPlat($plat1);
         $cat1->addPlat($plat10);
-
         $cat2->addPlat($plat2);
         $cat2->addPlat($plat3);
-
         $cat3->addPlat($plat4);
         $cat3->addPlat($plat5);
         $cat3->addPlat($plat8);
-
         $cat4->addPlat($plat6);
-
         $cat7->addPlat($plat9);
-
         $cat8->addPlat($plat11);
 
         // Commande //
@@ -236,7 +230,7 @@ class Jeu1 extends Fixture
         $manager->persist($commande10);
 
         $commande11 = new Commande();
-        $commande11->setDateCommande(New \DateTime('2022-05-11'));
+        $commande11->setDateCommande(new \DateTime('2022-05-11'));
         $commande11->setTotal(8.00);
         $commande11->setEtat(3);
         $manager->persist($commande11);
@@ -436,7 +430,7 @@ class Jeu1 extends Fixture
         $user6->addCommande($commande6);
         $user6->addCommande($commande8);
         $user7->addCommande($commande7);
-        
+
 
         $manager->flush();
     }
