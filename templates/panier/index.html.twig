@@ -3,6 +3,14 @@
 {% block title %}Panier{% endblock %}
 
 {% block body %}
+
+<pre>
+{{dump(contenuPanier)}}
+</pre>
+<pre>
+{{dump(panierPlat)}}
+</pre>
+
 <h1>Panier</h1>
     {% if contenuPanier is empty %}
         <p>Votre panier est vide.</p>

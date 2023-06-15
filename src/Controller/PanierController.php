@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\PanierService;
+use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,11 +50,21 @@ class PanierController extends AbstractController
     }
 
     #[Route('/panier', name: 'panier_affichage')]
-    public function afficherPanier(): Response
+    public function afficherPanier( PlatRepository $plat): Response
     {
         $contenuPanier = $this->panierService->getContenuPanier();
+        // $PlatPanier = $plat->PlatPanier();
+        // if ($PlatPanier == $contenuPanier) 
+        // {
+        //     return $this->render('panier/index.html.twig', [
+        //         'PanierPlat' => $PlatPanier,
+        //     ]);
+        // }
+        $panierPlat = $plat->Panier($contenuPanier);
+
         return $this->render('panier/index.html.twig', [
             'contenuPanier' => $contenuPanier,
+            'panierPlat' => $panierPlat,
         ]);
     }
 }

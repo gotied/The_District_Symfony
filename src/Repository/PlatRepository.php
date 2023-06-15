@@ -40,30 +40,30 @@ class PlatRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Plat[] Returns an array of Plat objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Plat[] Returns an array of Plat objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Plat
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Plat
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 
     public function allplat()
     {
@@ -76,22 +76,38 @@ class PlatRepository extends ServiceEntityRepository
         $query = $queryBuilder->getQuery();
         $result = $query->getResult();
 
-        return $result;  
+        return $result;
     }
 
     public function PlatParCat($id)
-{
-    $queryBuilder = $this->createQueryBuilder('p');
-    $queryBuilder
-        ->join('p.categorie', 'c')
-        ->where('c.id = :id')
-        ->setParameter('id', $id)
-        ->orderBy('p.id', 'ASC');
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder
+            ->join('p.categorie', 'c')
+            ->where('c.id = :id')
+            ->setParameter('id', $id)
+            ->orderBy('p.id', 'ASC');
 
-    $query = $queryBuilder->getQuery();
-    $result = $query->getResult();
+        $query = $queryBuilder->getQuery();
+        $result = $query->getResult();
 
-    return $result;
-}
+        return $result;
+    }
 
+    public function PlatPanier(): array
+    {
+        return parent::findAll();
+    }
+
+    public function Panier($id)
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder
+        ->where('p.id = :id')
+        ->setParameter('id', $id);
+
+        $query = $queryBuilder->getQuery();
+        $result =$query->getResult();
+        return $result;
+    }
 }

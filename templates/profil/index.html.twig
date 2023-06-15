@@ -3,5 +3,9 @@
 {% block title %}Profil{% endblock %}
 
 {% block body %}
-
+{% if app.user %}
+<h1>profil</h1>
+{% else %} 
+<p>vous devez vous connecter, pour voir cette page</p>
+{% endif %}
 {% endblock %}
