@@ -40,6 +40,14 @@
     width: 170px;
     transition: width 2s linear 0s;
 }
+.badge {
+	background-color: #771133;
+	color: white;
+	border-radius: 50%;
+  }
+/* .badge:hover {
+	color: #000000;
+} */
 #titre_h1 {
 	animation: myAnimCat 1s ease 0s 1 normal none;	
 }
@@ -73,6 +81,9 @@
 	color: #771133;
 	font-weight: bold;
 	text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+.nav-link:hover {
+	color: #000000;
 }
 #search-bar-style {
 	font-family: "Trebuchet MS", sans-serif;

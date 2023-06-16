@@ -1,24 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Panier{% endblock %}
+{% block title %}Panier
+{% endblock %}
 
 {% block body %}
 
-<pre>
+	<pre>
 {{dump(contenuPanier)}}
 </pre>
-<pre>
+	<pre>
 {{dump(panierPlat)}}
 </pre>
 
-<h1>Panier</h1>
-    {% if contenuPanier is empty %}
-        <p>Votre panier est vide.</p>
-    {% else %}
-        <ul>
-            {% for platId, quantite in contenuPanier %}
-                <li>Plat ID: {{ platId }}, Quantité: {{ quantite }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+<div class="d-flex flex-wrap justify-content-center">
+	<h1>Panier</h1>
+</div>
+	{% if contenuPanier is empty %}
+		<p>Votre panier est vide.</p>
+	{% else %}
+		{# <ul>
+			{% for platId, quantite in contenuPanier %}
+				<li>Plat ID:
+					{{ platId }}, Quantité:
+					{{ quantite }}</li>
+			{% endfor %}
+		</ul> #}
+	{% endif %}
+	<div class="d-flex flex-wrap justify-content-center">
+		{% for plat in panierPlat %}
+			<div class="card text-bg-dark my-5 pt-3 px-2 mx-5 col-3" style="width: 24rem; " id="card-body">
+				<img src="{{asset ('img/food/')}}{{ plat.image }}" class="card-img-top" alt="{{ plat.libelle }}">
+				<div class="card-body">
+					<h5 class="card-title" id="card-text">{{ plat.libelle }}</h5>
+					<p class="card-text" id="card-text">{{ plat.description }}<br><br>{{ plat.prix }} €<br><br>Quantité : 
+                    {% for platId, quantite in contenuPanier %} 
+                    {% if platId == plat.id %}
+                    {{ quantite }} 
+                    {% endif %}
+                    {% endfor %}
+                    </p>
+					{# <a href="#" id="btn-style" class="btn btn-primary">Commander</a> #}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}

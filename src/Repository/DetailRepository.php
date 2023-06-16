@@ -89,7 +89,7 @@ public function top3plat(): array {
     $queryBuilder = $this->createQueryBuilder('d');
 
     $queryBuilder
-        ->select('count(p.id) AS nbr_vente, p.id, p.libelle, p.image')
+        ->select('count(p.id) AS nbr_vente, p.id, p.libelle, p.description, p.prix, p.image')
         ->leftJoin('d.plat', 'p')
         ->leftJoin('d.commande', 'c')
         ->where('c.etat = :etat')

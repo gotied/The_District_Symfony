@@ -3,8 +3,7 @@
 {% block title %}The District{% endblock %}
 
 {% block body %}
-{# 
-<pre>
+{# <pre>
     {{dump(top6cat)}}
 </pre>  #}
 
@@ -12,6 +11,11 @@
 {{dump(top3plat)}}
 </pre> #}
 
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
 <div class="d-flex flex-wrap justify-content-center" id="div-bar">
   <form method="get" class="d-flex" role="search" id="search-bar" action="page_recherche.php">
     <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" id="search-bar-style" name="search">
@@ -44,11 +48,12 @@
 
 {% for plat in top3plat %}
 
-<div class="card text-bg-dark my-5 pt-3 px-2 mx-5 col-3" style="width: 18rem; height: 20rem;" id="card-body">
+<div class="card text-bg-dark my-5 pt-3 px-2 mx-5 col-3" style="width: 22rem;" id="card-body">
   <img src="{{asset('img/food/')}}{{plat.image}}" class="card-img-top" alt="{{plat.libelle}}" height="70%">
   <div class="card-body">
     <h5 class="card-title" id="card-text">{{plat.libelle}}</h5>
-    <a href="{{ path('panier_ajout', { 'id': plat.id }) }}">Ajouter au panier</a>
+    <p class="card-text" id="card-text">{{ plat.description }}<br><br>{{ plat.prix }} €</p>
+    <a href="{{ path('panier_ajout', { 'id': plat.id }) }}" class="nav-link"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16"><path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/><path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></a>
   </div>
 </div>
 {% endfor %}

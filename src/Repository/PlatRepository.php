@@ -94,20 +94,15 @@ class PlatRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function PlatPanier(): array
+    public function PlatPanier() 
     {
-        return parent::findAll();
-    }
-
-    public function Panier($id)
-    {
-        $queryBuilder = $this->createQueryBuilder('p');
-        $queryBuilder
-        ->where('p.id = :id')
-        ->setParameter('id', $id);
-
-        $query = $queryBuilder->getQuery();
-        $result =$query->getResult();
+        $qb = $this->createQueryBuilder('p');
+        $qb->select('pl')
+           ->from(Plat::class, 'pl');
+    
+        $query = $qb->getQuery();
+        $result = $query->getArrayResult();
+    
         return $result;
     }
 }

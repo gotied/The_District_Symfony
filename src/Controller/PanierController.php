@@ -30,37 +30,34 @@ class PanierController extends AbstractController
     #[Route('/panier/ajout/{id}', name: 'panier_ajout')]
     public function ajouterPlat(Request $request, int $id): Response
     {
-       $this->panierService->ajouterPlat($id);
-         return new Response('Plat ajouté au panier.');
-        dd($id);
+        $this->panierService->ajouterPlat($id);
+        $this->addFlash('success', 'Plat ajouté au panier.');
+        return $this->redirect($request->headers->get('referer'));
     }
 
     #[Route('/panier/suppression/{id}', name: 'panier_suppression')]
     public function supprimerPlat(Request $request, int $id): Response
     {
         $this->panierService->supprimerPlat($id);
-        return new Response('Plat supprimé du panier.');
+        $this->addFlash('success', 'Plat supprimé du panier.');
+        return $this->redirect($request->headers->get('referer'));
     }
 
     #[Route('/panier/vider', name: 'panier_vider')]
     public function viderPanier(Request $request): Response
     {
         $this->panierService->viderPanier();
-        return new Response('Le panier a été vidé.');
+        $this->addFlash('success', 'Le panier a été vidé.');
+        return $this->redirect($request->headers->get('referer'));
     }
 
     #[Route('/panier', name: 'panier_affichage')]
-    public function afficherPanier( PlatRepository $plat): Response
+    public function afficherPanier(PlatRepository $plat): Response
     {
         $contenuPanier = $this->panierService->getContenuPanier();
-        // $PlatPanier = $plat->PlatPanier();
-        // if ($PlatPanier == $contenuPanier) 
-        // {
-        //     return $this->render('panier/index.html.twig', [
-        //         'PanierPlat' => $PlatPanier,
-        //     ]);
-        // }
-        $panierPlat = $plat->Panier($contenuPanier);
+        $panierPlatId = array_keys($contenuPanier);
+        $panierPlat = $plat->findBy(['id' => $panierPlatId]);
+
 
         return $this->render('panier/index.html.twig', [
             'contenuPanier' => $contenuPanier,
