@@ -5,6 +5,13 @@
 {% block body %}
 {% if app.user %}
 <h1>profil</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+        <br><h3>admin<h3> 
+    {% endif %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <br><h3>super admin</h3>
+    {% endif %}
+    
 {% else %} 
 <p>vous devez vous connecter, pour voir cette page</p>
 {% endif %}

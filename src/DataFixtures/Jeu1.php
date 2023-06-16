@@ -9,9 +9,17 @@ use App\Entity\Plat;
 use App\Entity\Utilisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class Jeu1 extends Fixture
 {
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
+
     public function load(ObjectManager $manager): void
     {
         // Catégorie //
@@ -285,113 +293,113 @@ class Jeu1 extends Fixture
         $manager->persist($detail12);
 
         // Utilisateur //
-        $user1 = new Utilisateur();
+         $user1 = new Utilisateur();
         $user1->setEmail("thom@gmail.com");
-        $user1->setPassword('test1');
+        $user1->setPassword('test1', $this->passwordHasher);
         $user1->setNom("Gilchrist");
         $user1->setPrenom("Thomas");
         $user1->setTelephone("7410001450");
         $user1->setAdresse("1277 Sunburst Drive");
         $user1->setCp("60002");
         $user1->setVille("New-York");
-        $user1->setRoles("ROLE_CLIENT");
+        $user1->setRoles(['ROLE_USER']);
         $manager->persist($user1);
 
         $user2 = new Utilisateur();
         $user2->setEmail("kelly@gmail.com");
-        $user2->setPassword('test2');
+        $user2->setPassword('test2', $this->passwordHasher);
         $user2->setNom("Dillard");
         $user2->setPrenom("Kelly");
         $user2->setTelephone("7896547800");
         $user2->setAdresse("308 Post Avenue");
         $user2->setCp("56000");
         $user2->setVille("Dallas");
-        $user2->setRoles("ROLE_CLIENT");
+        $user2->setRoles(['ROLE_USER']);
         $manager->persist($user2);
 
         $user3 = new Utilisateur();
         $user3->setEmail("martha@gmail.com");
-        $user3->setPassword('test3');
+        $user3->setPassword('test3', $this->passwordHasher);
         $user3->setNom("Woods");
         $user3->setPrenom("Martha");
         $user3->setTelephone("78540001200");
         $user3->setAdresse("478 Avenue Street");
         $user3->setCp("696969");
         $user3->setVille("Mont-Cuq");
-        $user3->setRoles("ROLE_CLIENT");
+        $user3->setRoles(['ROLE_USER']);
         $manager->persist($user3);
 
         $user4 = new Utilisateur();
         $user4->setEmail("charlie@gmail.com");
-        $user4->setPassword('test4');
+        $user4->setPassword('test4', $this->passwordHasher);
         $user4->setNom("Danger");
         $user4->setPrenom("Charlie");
         $user4->setTelephone("7458965550");
         $user4->setAdresse("3140 Bartlett Avenue");
         $user4->setCp("93000");
         $user4->setVille("Paris");
-        $user4->setRoles("ROLE_CLIENT");
+        $user4->setRoles(['ROLE_USER']);
         $manager->persist($user4);
 
         $user5 = new Utilisateur();
         $user5->setEmail("hedley@gmail.com");
-        $user5->setPassword('test5');
+        $user5->setPassword('test5', $this->passwordHasher);
         $user5->setNom("Hedley");
         $user5->setPrenom("Claudia");
         $user5->setTelephone("7451114400");
         $user5->setAdresse("1119 Kinney Street");
         $user5->setCp("76600");
         $user5->setVille("No-Where");
-        $user5->setRoles("ROLE_CLIENT");
+        $user5->setRoles(['ROLE_USER']);
         $manager->persist($user5);
 
         $user6 = new Utilisateur();
         $user6->setEmail("venno@gmail.com");
-        $user6->setPassword('test6');
+        $user6->setPassword('test6', $this->passwordHasher);
         $user6->setNom("Vargas");
         $user6->setPrenom("Vernon");
         $user6->setTelephone("7414744440");
         $user6->setAdresse("1234 Hazelwood Avenue");
         $user6->setCp("90100");
         $user6->setVille("HazelCity");
-        $user6->setRoles("ROLE_CLIENT");
+        $user6->setRoles(['ROLE_USER']);
         $manager->persist($user6);
 
         $user7 = new Utilisateur();
         $user7->setEmail("carlos@gmail.com");
-        $user7->setPassword('test7');
+        $user7->setPassword('test7', $this->passwordHasher);
         $user7->setNom("Grayson");
         $user7->setPrenom("Carlos");
         $user7->setTelephone("7401456980");
         $user7->setAdresse("2969 Hartland Avenue");
         $user7->setCp("000000");
         $user7->setVille("ZombieLand");
-        $user7->setRoles("ROLE_CLIENT");
+        $user7->setRoles(['ROLE_USER']);
         $manager->persist($user7);
 
         $user8 = new Utilisateur();
         $user8->setEmail("jonathan@gmail.com");
-        $user8->setPassword('test8');
+        $user8->setPassword('test8', $this->passwordHasher);
         $user8->setNom("Caudill");
         $user8->setPrenom("Jonathan");
         $user8->setTelephone("7410256996");
         $user8->setAdresse("1959 Limer Street");
         $user8->setCp("9591");
         $user8->setVille("Remil");
-        $user8->setRoles("ROLE_CLIENT");
+        $user8->setRoles(['ROLE_USER']);
         $manager->persist($user8);
 
-        /*$user8 = new Utilisateur();
-        $user8->setEmail("");
-        $user8->setPassword('');
-        $user8->setNom("");
-        $user8->setPrenom("");
-        $user8->setTelephone("");
-        $user8->setAdresse("");
-        $user8->setCp("");
-        $user8->setVille("");
-        $user8->setRoles("");
-        $manager->persist($user8);*/
+        /*$user9 = new Utilisateur();
+        $user9->setEmail("");
+        $user9->setPassword('test9', $this->passwordHasher);
+        $user9->setNom("");
+        $user9->setPrenom("");
+        $user9->setTelephone("");
+        $user9->setAdresse("");
+        $user9->setCp("");
+        $user9->setVille("");
+        $user9->setRoles(['']);
+        $manager->persist($user9);*/
 
         $commande1->addDetail($detail1);
         $commande2->addDetail($detail2);
