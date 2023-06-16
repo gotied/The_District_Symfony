@@ -1,40 +1,70 @@
 <?php
 namespace App\Service;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class PanierService
 {
-    private $session;
+    private $requestStack;
 
-    public function __construct(SessionInterface $session)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->session = $session;
+        $this->requestStack = $requestStack;
     }
 
     public function ajouterPlat(int $platId)
     {
-        $panier = $this->session->get('panier', []);
+        $request = $this->getCurrentRequest();
+        $session = $request->getSession();
+
+        $panier = $session->get('panier', []);
         $panier[$platId] = ($panier[$platId] ?? 0) + 1;
-        $this->session->set('panier', $panier);
+        $session->set('panier', $panier);
     }
 
     public function supprimerPlat(int $platId)
     {
-        $panier = $this->session->get('panier', []);
+        $request = $this->getCurrentRequest();
+        $session = $request->getSession();
+
+        $panier = $session->get('panier', []);
         if (isset($panier[$platId])) {
             unset($panier[$platId]);
-            $this->session->set('panier', $panier);
+            $session->set('panier', $panier);
         }
     }
 
     public function viderPanier()
     {
-        $this->session->remove('panier');
+        $request = $this->getCurrentRequest();
+        $session = $request->getSession();
+        $session->remove('panier');
     }
 
     public function getContenuPanier()
     {
-        return $this->session->get('panier', []);
+        $request = $this->getCurrentRequest();
+        $session = $request->getSession();
+        return $session->get('panier', []);
+    }
+
+    private function getCurrentRequest()
+    {
+        return $this->requestStack->getCurrentRequest();
+    }
+
+    public function modifierQuantite(int $platId, int $quantite)
+    {
+        $request = $this->getCurrentRequest();
+        $session = $request->getSession();
+        $panier = $session->get('panier', []);
+
+        if ($quantite > 0) {
+            $panier[$platId] = $quantite;
+        } else {
+            unset($panier[$platId]);
+        }
+
+        $session->set('panier', $panier);
     }
 }

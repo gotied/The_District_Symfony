@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class PanierController extends AbstractController
 {
@@ -64,4 +66,12 @@ class PanierController extends AbstractController
             'panierPlat' => $panierPlat,
         ]);
     }
+
+    #[Route('/modifier-quantite/{platId}/{quantite}', name: 'modifier_quantite')]
+public function modifierQuantite(int $platId, int $quantite): JsonResponse
+{
+    $this->panierService->modifierQuantite($platId, $quantite);
+    return new JsonResponse(['success' => true]);
+}
+
 }

@@ -28,16 +28,14 @@
 	{% endif %}
 	<div class="d-flex flex-wrap justify-content-center">
 		{% for plat in panierPlat %}
-			<div class="card text-bg-dark my-5 pt-3 px-2 mx-5 col-3" style="width: 24rem; " id="card-body">
-				<img src="{{asset ('img/food/')}}{{ plat.image }}" class="card-img-top" alt="{{ plat.libelle }}">
+			<div class="card text-bg-dark my-5 pt-3 px-2 mx-5 col-3" style="width: 16rem; " id="card-body">
+				<img src="{{asset ('img/food/')}}{{ plat.image }}" class="img-fluid card-img-top" alt="{{ plat.libelle }}">
 				<div class="card-body">
 					<h5 class="card-title" id="card-text">{{ plat.libelle }}</h5>
-					<p class="card-text" id="card-text">{{ plat.description }}<br><br>{{ plat.prix }} €<br><br>Quantité : 
-                    {% for platId, quantite in contenuPanier %} 
-                    {% if platId == plat.id %}
-                    {{ quantite }} 
-                    {% endif %}
-                    {% endfor %}
+					<p class="card-text" id="card-text">{{ plat.description }}<br><br>{{ plat.prix }} €<br>
+						<button class="btn-quant" onclick="diminuerQuantite({{ plat.id }})"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-dash" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M5.5 10a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/><path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/></svg></button>
+                    	<span id="quantite-{{ plat.id }}">{{ contenuPanier[plat.id] ?? 0 }}</span>
+                		<button class="btn-quant" onclick="augmenterQuantite({{ plat.id }})"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag-plus" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 7.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0v-1.5H6a.5.5 0 0 1 0-1h1.5V8a.5.5 0 0 1 .5-.5z"/><path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/></svg></button>
                     </p>
 					{# <a href="#" id="btn-style" class="btn btn-primary">Commander</a> #}
 				</div>
