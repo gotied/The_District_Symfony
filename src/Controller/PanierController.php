@@ -14,14 +14,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class PanierController extends AbstractController
 {
-    // #[Route('/panier', name: 'app_panier')]
-    // public function index(): Response
-    // {
-    //     return $this->render('panier/index.html.twig', [
-    //         'controller_name' => 'PanierController',
-    //     ]);
-    // }
-
     private $panierService;
 
     public function __construct(PanierService $panierService)
@@ -68,10 +60,9 @@ class PanierController extends AbstractController
     }
 
     #[Route('/modifier-quantite/{platId}/{quantite}', name: 'modifier_quantite')]
-public function modifierQuantite(int $platId, int $quantite): JsonResponse
-{
-    $this->panierService->modifierQuantite($platId, $quantite);
-    return new JsonResponse(['success' => true]);
-}
-
+    public function modifierQuantite(int $platId, int $quantite): JsonResponse
+    {
+        $this->panierService->modifierQuantite($platId, $quantite);
+        return new JsonResponse(['success' => true]);
+    }
 }
