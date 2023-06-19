@@ -96,11 +96,11 @@ class PlatRepository extends ServiceEntityRepository
 
     public function PlatPanier() 
     {
-        $qb = $this->createQueryBuilder('p');
-        $qb->select('pl')
+        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder->select('pl')
            ->from(Plat::class, 'pl');
     
-        $query = $qb->getQuery();
+        $query = $queryBuilder->getQuery();
         $result = $query->getArrayResult();
     
         return $result;

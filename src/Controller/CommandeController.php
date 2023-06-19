@@ -15,6 +15,8 @@ class CommandeController extends AbstractController
     #[Route('/commande', name: 'app_commande')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        
         $form = $this->createForm(CommandeFormType::class);
         $form->handleRequest($request);
 

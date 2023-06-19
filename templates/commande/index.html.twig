@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CommandeController!{% endblock %}
+{% block title %}Commande{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="d-flex flex-wrap justify-content-center">
+<h1 id="titre_h1-2">Commande du plat n°<?= $myPlat->id; ?></h1>
+</div>
+<br>
+<br>
+<div class="d-flex flex-wrap justify-content-center">
+<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 25rem;" id="card-body2">
+  <img src="images_the_district/food/<?= $myPlat->image ?>" class="card-img-top" alt="<?= $myPlat->libelle ?>" height="70%">
+  <div class="card-body">
+    <h5 class="card-title" id="card-text"><?= $myPlat->libelle ?></h5>
+    <p class="card-text" id="card-text"><?= $myPlat->description ?><br><br>Prix : <?= $myPlat->prix ?>€</p>
+  </div>
+</div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/test/Bureau/The_District_Symfony/The_District_Symfony-1/src/Controller/CommandeController.php'|file_link(0) }}">src/Controller/CommandeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/test/Bureau/The_District_Symfony/The_District_Symfony-1/templates/commande/index.html.twig'|file_link(0) }}">templates/commande/index.html.twig</a></code></li>
-    </ul>
+ <div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 25rem;" id="card-commande">
+    <div class="card-body">
+    <h5 class="card-title" id="card-text">Vos informations : </h5>
+    <p class="card-text"> 
+    <form action ="script_commande.php" method="post" enctype="multipart/form-data" >
+    <input type="hidden" name="id_plat" value="<?= $myPlat->id ?>">
+    <input type="hidden" name="libelle" value="<?= $myPlat->libelle ?>">
+    <label for="titre">Votre nom & prénom : </label><br>
+    <input type="text" name="nom" id="nom" value="" required>
+    <label for="tel">Numéro de téléphone : </label><br>
+    <input type="text" name="tel" id="tel" value="" required>
+    <label for="email">Adresse mail : </label><br>
+    <input type="email" name="email" id="email" value="" required>
+    <label for="label">Adresse postal : </label><br>
+    <input type="text" name="adresse" id="adresse" value="" required><br><br>
+    <label for="quantite"></label>
+    <select name="quantite" id="quantite" required>
+    <option value="">-- Choisissez une quantité --</option>
+    </select>
+    <br><label for="Prix">Prix :</label><br>
+    <input type="text" id="Prix" name="Prix" value="<?= $myPlat->prix ?>" readonly>
+    <br><br>
+    <input type="reset" value="Annuler" id="btn-style-2"><br><br>
+    <input class="btn" type="submit" value="Commander" id="btn-style">
+    </form>
+    </p>
+    </div>
+    </div>
 </div>
 {% endblock %}
