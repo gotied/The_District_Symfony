@@ -46,4 +46,12 @@
     </div>
     </div>
 </div>
+{{form_start(form)}}
+  {{form_row(form.date)}}
+  {{form_row(form.total)}}
+  {{form_row(form.etat)}}
+  {{form_row(form.utilisateur)}}
+  {{form_row(form_quantite)}}
+  {{form_row(form.plat)}}
+{{form_end(form)}}
 {% endblock %}

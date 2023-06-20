@@ -16,6 +16,8 @@ class CommandeFormType extends AbstractType
             ->add('total')
             ->add('etat')
             ->add('utilisateur')
+            ->add('quantite')
+            ->add('plat')
         ;
     }
 
