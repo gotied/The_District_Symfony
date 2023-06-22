@@ -94,15 +94,15 @@ class PlatRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function PlatPanier() 
-    {
-        $queryBuilder = $this->createQueryBuilder('p');
-        $queryBuilder->select('pl')
-           ->from(Plat::class, 'pl');
+    // public function PlatPanier() 
+    // {
+    //     $queryBuilder = $this->createQueryBuilder('p');
+    //     $queryBuilder->select('pl')
+    //        ->from(Plat::class, 'pl');
     
-        $query = $queryBuilder->getQuery();
-        $result = $query->getArrayResult();
+    //     $query = $queryBuilder->getQuery();
+    //     $result = $query->getArrayResult();
     
-        return $result;
-    }
+    //     return $result;
+    // }
 }
