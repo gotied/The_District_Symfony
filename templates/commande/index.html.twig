@@ -46,13 +46,24 @@
     </div>
     </div>
 </div>
+
+<pre>
+{{dump(app.session.get('panier'))}}
+</pre>
+
+
 {{ form_start(form) }}
-  {{ form_row(form.date_commande) }}
+  {# {{ form_row(form.date_commande) }}
   {{ form_row(form.total) }}
   {{ form_row(form.etat) }}
-  {{ form_row(form.utilisateur) }}
-  {{ form_row(form.quantite) }}
-  {{ form_row(form.plat) }}
+  {{ form_row(form.utilisateur) }} #}
+  
+  {% set panier = app.session.get('panier') %}
+{% for id, quantite in panier %}
+  {{ form_row(form.quantite, {'attr': {'placeholder': quantite|join}}) }}
+  {% endfor %}
+
+  {# {{ form_row(form.plat) }} #}
 {{ form_end(form) }}
 
 {% endblock %}

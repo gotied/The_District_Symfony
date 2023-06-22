@@ -12,10 +12,10 @@ class CommandeFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date_commande')
+            //->add('date_commande')
             ->add('total')
-            ->add('etat')
-            ->add('utilisateur')
+            //->add('etat')
+            //->add('utilisateur')
             ->add('quantite')
             ->add('plat')
         ;
