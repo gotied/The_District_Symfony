@@ -4,46 +4,53 @@
 {% endblock %}
 
 {% block body %}
-	{% for p in plat %}
+<pre>
+  {{ dump(app.user) }}
+</pre>
+{# <pre>
+  {{ dump(user) }}
+</pre> #}
 
 		<div class="d-flex flex-wrap justify-content-center">
-			<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 25rem;" id="card-body2">
-				<img src="{{asset ('img/food/')}}{{ p.image }}" class="card-img-top" alt="{{ p.libelle }}" height="70%">
+    {% for p in plat %}
+    {% set panier = app.session.get('panier') %}
+			<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 16rem; height: 25rem;" id="card-body2">
+				<img src="{{asset ('img/food/')}}{{ p.image }}" class="img-fluid card-img-top" alt="{{ p.libelle }}" height="70%">
 				<div class="card-body">
 					<h5 class="card-title" id="card-text">{{ p.libelle }}</h5>
-					<p class="card-text" id="card-text"><?= $myPlat->description ?><br><br>Prix :
-						<?= $myPlat->prix ?>€</p>
+					<p class="card-text" id="card-text">
+          {{ p.prix }}
+          <br><br>
+          {% for id, quantite in panier %}
+          {% if id == p.id %}
+			    <select name="quantite_{{ id }}">
+				  {% for q in 1..10 %}
+					<option value="{{ q }}" {% if q == quantite %} selected {% endif %}>{{ q }}</option>
+				  {% endfor %}
+			  </select>
+        {% endif %}
+		    {% endfor %}
+          </p>
 				</div>
 			</div>
       {% endfor %}
-    </div>
 
-			<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 25rem;" id="card-commande">
+			<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 20rem;" id="card-commande">
 				<div class="card-body">
-					<h5 class="card-title" id="card-text">Vos informations :
+					<h5 class="card-title" id="card-text">
 					</h5>
 					<p class="card-text">
-						<form action="script_commande.php" method="post" enctype="multipart/form-data">
-							<input type="hidden" name="id_plat" value="<?= $myPlat->id ?>">
-							<input type="hidden" name="libelle" value="<?= $myPlat->libelle ?>">
-							<label for="titre">Votre nom & prénom :
-							</label><br>
-							<input type="text" name="nom" id="nom" value="" required>
-							<label for="tel">Numéro de téléphone :
-							</label><br>
-							<input type="text" name="tel" id="tel" value="" required>
-							<label for="email">Adresse mail :
-							</label><br>
-							<input type="email" name="email" id="email" value="" required>
-							<label for="label">Adresse postal :
-							</label><br>
-							<input type="text" name="adresse" id="adresse" value="" required><br><br>
-							<label for="quantite"></label>
-							<select name="quantite" id="quantite" required>
-								<option value="">-- Choisissez une quantité --</option>
-							</select>
-							<br><label for="Prix">Prix :</label><br>
-							<input type="text" id="Prix" name="Prix" value="<?= $myPlat->prix ?>" readonly>
+						<form action="#" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="id_user" value="{{ app.user.id }}">
+              {% for p in plat %}
+              <input type="hidden" name="id_plat" value="{{ p.id }}">  
+              {% endfor %}
+              {% set etat = 1 %}
+							<input type="hidden" name="etat" value="{{ etat }}">
+              <input type="hidden" name="date" value="{{ date|date('Y-m-d')}}">
+              <br><br>
+							<br><label for="Prix">Total :</label><br>
+							<input type="text" id="Prix" name="Prix" value="#" readonly>
 							<br><br>
 							<input type="reset" value="Annuler" id="btn-style-2"><br><br>
 							<input class="btn" type="submit" value="Commander" id="btn-style">
@@ -67,16 +74,4 @@
 		  {{ form_row(form.utilisateur) }}
 		  {{ form_row(form.plat) }}
 		{{ form_end(form) }} #}
-
-
-		{% set panier = app.session.get('panier') %}
-
-		{% for id, quantite in panier %}
-			<select name="quantite_{{ id }}">
-				{% for i in 1..10 %}
-					<option value="{{ i }}" {% if i == quantite %} selected {% endif %}>{{ i }}</option>
-				{% endfor %}
-			</select>
-		{% endfor %}
-
 	{% endblock %}
