@@ -4,7 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	<pre>
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+{# <pre>
   {{ dump(app.user) }}
 </pre>
 	<pre>
@@ -12,64 +18,51 @@
 </pre>
 	<pre>
   {{ dump(plat) }}
-</pre>
-{# <pre>
-	{{ dump(user) }}
 </pre> #}
 
-	<div class="d-flex flex-wrap justify-content-center">
-		{% for p in plat %}
-			{% set panier = app.session.get('panier') %}
-			{% set quantite = panier[p.id] %}
-			{% set totalPrix = p.prix * quantite %}
-			<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 16rem; height: 25rem;" id="card-body2">
-				<img src="{{ asset('img/food/') ~ p.image }}" class="img-fluid card-img-top" alt="{{ p.libelle }}" height="70%">
-				<div class="card-body">
-					<h5 class="card-title" id="card-text">{{ p.libelle }}</h5>
-					<p class="card-text" id="card-text">
-						<input type="hidden" name="prix" value="{{ p.prix }}">
-						<span id="total_{{ p.id }}">{{ totalPrix }}</span>
-						<br><br>
-						<select name="quantite_{{ p.id }}" onchange="modifierTotal()">
-							{% for q in 1..10 %}
-								<option value="{{ q }}" {% if q == quantite %} selected {% endif %}>{{ q }}</option>
-							{% endfor %}
-						</select>
-					</p>
+	<form action="{{ path('app_commande') }}" method="post" onsubmit="preparerFormulaire()">
+		<div class="d-flex flex-wrap justify-content-center">
+			{% for p in plat %}
+				{% set panier = app.session.get('panier') %}
+				{% set quantite = panier[p.id] %}
+				{% set totalPrix = p.prix * quantite %}
+				<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 16rem; height: 25rem;" id="card-body2">
+					<img src="{{ asset('img/food/') ~ p.image }}" class="img-fluid card-img-top" alt="{{ p.libelle }}" height="70%">
+					<div class="card-body">
+						<h5 class="card-title" id="card-text">{{ p.libelle }}</h5>
+						<p class="card-text" id="card-text">
+							<input type="hidden" name="prix" value="{{ p.prix }}" disabled>
+							<span id="total_{{ p.id }}">{{ totalPrix }}</span>
+							<br><br>
+							<select name="quantite_{{ p.id }}" onchange="modifierTotal()">
+								{% for q in 1..10 %}
+									<option value="{{ q }}" {% if q == quantite %} selected {% endif %}>{{ q }}</option>
+								{% endfor %}
+							</select>
+							<a href="{{path ('panier_suppression', {'id': p.id})}}" class="btn-cart" style="margin-left: 100px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-x" viewBox="0 0 16 16"><path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z"/><path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg></a>
+						</p>
+					</div>
 				</div>
-			</div>
-		{% endfor %}
+			{% endfor %}
 
-
-		<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 20rem;" id="card-commande">
-			<div class="card-body">
-				<h5 class="card-title" id="card-text"></h5>
-				<p class="card-text">
-					<form action="#" method="post" enctype="multipart/form-data">
+			<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 20rem; height: 13rem;" id="card-commande">
+				<div class="card-body">
+					<p class="card-text">
 						<input type="hidden" name="id_user" value="{{ app.user.id }}">
 						{% for p in plat %}
 							<input type="hidden" name="id_plat" value="{{ p.id }}">
 						{% endfor %}
-						{# {% set etat = 1 %} 
-						<input type="hidden" name="etat" value="{{ etat }}"> #}
+						{% set etat = 1 %} 
+						<input type="hidden" name="etat" value="{{ etat }}">
 						<input type="hidden" name="date" value="{{ date|date('Y-m-d')}}">
-						<br><br>
 						<br><label for="total">Total :</label><br>
 						<input type="text" id="total" name="total" readonly>
 						<br><br>
-						<input type="reset" value="Annuler" id="btn-style-2"><br><br>
+						<input type="hidden" name="_token" value="{{ csrf_token('commande') }}">
 						<input class="btn" type="submit" value="Commander" id="btn-style">
-					</form>
-				</p>
+					</p>
+				</div>
 			</div>
 		</div>
-	</div>
-
-{# {{ form_start(form) }}
-	{{ form_row(form.date_commande) }}
-	{{ form_row(form.total) }}
-	{{ form_row(form.etat) }}
-	{{ form_row(form.utilisateur) }}
-	{{ form_row(form.plat) }}
-{{ form_end(form) }} #}
+	</form>
 {% endblock %}

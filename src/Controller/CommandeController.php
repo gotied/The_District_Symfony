@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
-use App\Form\CommandeFormType;
+use App\Entity\Detail;
 use App\Repository\PlatRepository;
 use App\Repository\UtilisateurRepository;
 use DateTime;
@@ -20,33 +20,54 @@ class CommandeController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         
-        $form = $this->createForm(CommandeFormType::class);
-        $form->handleRequest($request);
+        $panier = $request->getSession()->get('panier');
+        $idPlats = array_keys($panier);
+        $plats = $plat->findBy(['id' => $idPlats]);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $dateCommande = new DateTime();
+
+        if ($request->isMethod('POST')) {
+            
+            $idUser = $request->request->get('id_user');
+            $utilisateur = $user->find($idUser);
+            $date = $request->request->get('date');
+            $total = $request->request->get('total');
+            $etat = $request->request->get('etat');
+
+            $date = DateTime::createFromFormat('Y-m-d', $date);
+            
             $commande = new Commande();
-            $data = $form->getData();
-            $commande = $data;
+            $commande->setUtilisateur($utilisateur);
+            $commande->setDateCommande($date);
+            $commande->setTotal($total);
+            $commande->setEtat($etat);
 
             $entityManager->persist($commande);
             $entityManager->flush();
+
+            foreach ($plats as $plat) {
+                $quantite = $request->request->get('quantite_' . $plat->getId());
+                $idPlat = $plat->getId();
+
+                $detail = new Detail();
+                $detail->setQuantite($quantite);
+                $detail->setPlat($plat);
+                $detail->setCommande($commande);
+
+                $entityManager->persist($detail);
+            }
+
+            $entityManager->flush();
+
+            $request->getSession()->remove('panier');
+            
+            return $this->redirectToRoute('app_profil');
         }
-
-        $panier = $request->getSession()->get('panier');
-        $id = array_keys($panier);
-        $idPlat = $plat->findBy(['id' => $id]);
-
-        $date_commande = new DateTime();
-
-        // $sessionUser = $request->getSession()->get('_security.last_username');
-        // $utilisateur = $user->findBy(['email' => $sessionUser]);
 
         return $this->render('commande/index.html.twig', [
             'controller_name' => 'CommandeController',
-            'form' => $form,
-            'plat' => $idPlat,
-            // 'user' => $utilisateur,
-            'date' => $date_commande
+            'plat' => $plats,
+            'date' => $dateCommande
         ]);
     }
 }

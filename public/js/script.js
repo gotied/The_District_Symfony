@@ -41,10 +41,17 @@ function modifierTotal() {
   }
   document.getElementById("total").value = total.toFixed(2) + " €";
 }
-window.addEventListener("load", modifierTotal);
+window.addEventListener("DOMContentLoaded", modifierTotal);
 
 var selects = document.getElementsByTagName("select");
 for (var i = 0; i < selects.length; i++) {
   selects[i].addEventListener("change", modifierTotal);
+}
+
+function preparerFormulaire() {
+  var totalField = document.getElementById("total");
+  var totalValue = totalField.value;
+  totalValue = totalValue.replace(" €", "");
+  totalField.value = totalValue;
 }
 
