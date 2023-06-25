@@ -10,26 +10,26 @@
     </div>
 {% endfor %}
 
-	<pre>
+	{# <pre>
 {{dump(contenuPanier)}}
 </pre>
 	<pre>
 {{dump(panierPlat)}}
-</pre>
+</pre> #}
 
 	{% if contenuPanier is empty %}
 		<div class="d-flex flex-wrap justify-content-center">
 			<h3>Votre panier est vide.</h3>
 		</div>	
 		<div class="d-flex flex-wrap justify-content-center">
-			<img src="/img/3v7fur.png" alt="-_-" style="height: 150px; width: 150px;">
+			<img src="/img/3v7fur.png" alt="-_-" style="height: 150px; width: 150px; margin-top: 15px;">
 		</div>	
 	{% else %}
 		<div class="d-flex flex-wrap justify-content-center">
 			<h3>Panier</h3>
 		</div>
 		<div class="d-flex flex-wrap justify-content-center">
-			<a href="{{path ('panier_vider')}}" id="btn-style">Vider le panier</a>
+			<a href="{{path ('panier_vider')}}" id="btn-style" style="margin-top: 10px;">Vider le panier</a>
 		</div>
 		<div class="d-flex flex-wrap justify-content-center">
 			{% for plat in panierPlat %}
