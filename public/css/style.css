@@ -260,7 +260,7 @@ input[type="text"] {
 	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
 }
 #card-inscription {
-	background: #fff url(https://cdn.pixabay.com/photo/2014/03/25/16/27/sheet-297179_960_720.png) center center/cover no-repeat;
+	background: #fff url(https://img.freepik.com/photos-gratuite/texture-papier-carre_23-2147786544.jpg) center center/cover no-repeat;
 	box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
 	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
 	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);	
@@ -473,4 +473,7 @@ table, th, td {
 	border: none;
 	background-color: transparent;
 	margin-top: 10px;
+}
+#registration_form_agreeTerms {
+	margin-left: 10px;
 }
