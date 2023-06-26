@@ -26,7 +26,7 @@
 				{% set panier = app.session.get('panier') %}
 				{% set quantite = panier[p.id] %}
 				{% set totalPrix = p.prix * quantite %}
-				<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 16rem; height: 25rem;" id="card-body2">
+				<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 16rem; height: 27rem;" id="card-body2">
 					<img src="{{ asset('img/food/') ~ p.image }}" class="img-fluid card-img-top" alt="{{ p.libelle }}" height="70%">
 					<div class="card-body">
 						<h5 class="card-title" id="card-text">{{ p.libelle }}</h5>
@@ -45,7 +45,7 @@
 				</div>
 			{% endfor %}
 
-			<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 20rem; height: 13rem;" id="card-commande">
+			<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 20rem; height: 15rem;" id="card-commande">
 				<div class="card-body">
 					<p class="card-text">
 						<input type="hidden" name="id_user" value="{{ app.user.id }}">
