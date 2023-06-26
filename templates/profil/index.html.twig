@@ -29,7 +29,9 @@
     {% for c in commande %}
      {% for d in detail %}
        {% if c.id == d.commande.id %}
-       blbl
+        {% if app.user.id == c.utilisateur.id %}
+       <p>{{c.id}} {{d.plat.id}}</p>
+        {% endif %}
        {% endif %} 
      {% endfor %}   
     {% endfor %}

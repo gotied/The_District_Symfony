@@ -15,6 +15,7 @@ class ProfilController extends AbstractController
     {
         $co = $commande->findAll();
         $de = $detail->findAll();
+        
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
             'commande' => $co,
