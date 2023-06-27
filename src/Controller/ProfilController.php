@@ -20,13 +20,13 @@ class ProfilController extends AbstractController
         $userId = $utilisateur->findBy(['email' => $user]);
         $c = $commande->findBy(['utilisateur' => $userId]);
         $d = $detail->findBy(['commande' => $c]);
-        // $p = $plat->findBy(['detail' => $d]);
+        $p = $plat->findAll();
 
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
             'commande' => $c,
             'detail' => $d,
-            // 'plat' => $p,
+            'plat' => $p,
             'user' => $userId
         ]);
     }

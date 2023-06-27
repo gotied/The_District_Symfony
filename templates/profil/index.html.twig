@@ -20,7 +20,7 @@
 </pre> #}
 
     {% if app.user.nom is null %}
-        <p>Veuillez tout d'abord renseigner vos informations personnelles !</p>
+        <p>Veuillez d'abord renseigner vos informations personnelles !</p>
     {% else %}
     <div class="d-flex flex-wrap justify-content-center">
         <div class="card" style="width: 18rem;">
@@ -38,9 +38,20 @@
   {% for c in commande %}
    <div class="card" style="width: 18rem; margin-bottom: 5px;">
   <div class="card-body">
-    <h5 class="card-title">Votre commande du {{c.getDateCommande().format('d/m/Y')}}</h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h5 class="card-title">Commande du {{c.getDateCommande().format('d/m/Y')}}</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
+    <p class="card-text">
+    {% for p in plat %}
+    {% for d in detail %}
+      {% if c.id == d.commande.id %}
+      {% if p.id == d.plat.id %}
+     {{p.libelle}}<br>{{d.quantite}}<br>
+      {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% endfor %}
+    {{c.total}} €<br>
+    </p>
     <a href="#" class="card-link">Card link</a>
     <a href="#" class="card-link">Another link</a>
   </div>
