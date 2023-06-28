@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Commande;
 use App\Repository\CommandeRepository;
 use App\Repository\DetailRepository;
 use App\Repository\PlatRepository;
@@ -25,10 +26,12 @@ class ProfilController extends AbstractController
 
         if ($request->isMethod('GET')) {
             $etat = $request->query->get('etat');
-            if ($c) {
-                if (is_numeric($etat)) {
-                $c[0]->setEtat($etat);
-                $entitymanager->flush();
+            if (is_numeric($etat)) {
+                $id = $request->query->get('id');
+                $commande = $commande->find($id);
+                if ($commande) {
+                    $commande->setEtat($etat);
+                    $entitymanager->flush();
                 }
             }
         }
