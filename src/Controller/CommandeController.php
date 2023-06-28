@@ -6,20 +6,23 @@ use App\Entity\Commande;
 use App\Entity\Detail;
 use App\Repository\PlatRepository;
 use App\Repository\UtilisateurRepository;
+use App\Service\MailService;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CommandeController extends AbstractController
 {
     #[Route('/commande', name: 'app_commande')]
-    public function index(Request $request, EntityManagerInterface $entityManager, PlatRepository $plat, UtilisateurRepository $user): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, PlatRepository $plat, UtilisateurRepository $user, MailerInterface $mailer): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
-        
+
         $panier = $request->getSession()->get('panier');
         $idPlats = array_keys($panier);
         $plats = $plat->findBy(['id' => $idPlats]);
@@ -27,7 +30,7 @@ class CommandeController extends AbstractController
         $dateCommande = new DateTime();
 
         if ($request->isMethod('POST')) {
-            
+
             $idUser = $request->request->get('id_user');
             $utilisateur = $user->find($idUser);
             $date = $request->request->get('date');
@@ -35,7 +38,7 @@ class CommandeController extends AbstractController
             $etat = $request->request->get('etat');
 
             $date = DateTime::createFromFormat('Y-m-d', $date);
-            
+
             $commande = new Commande();
             $commande->setUtilisateur($utilisateur);
             $commande->setDateCommande($date);
@@ -56,11 +59,35 @@ class CommandeController extends AbstractController
 
                 $entityManager->persist($detail);
             }
-
             $entityManager->flush();
 
+            $expediteur = 'commande@the_district.fr';
+            $destinataire = $utilisateur->getEmail();
+            $sujet = 'Commande du ' . $date->format('d-m-Y');
+            $message = "Votre commande : \n";
+
+            foreach ($plats as $plat) {
+                $quantite = $request->request->get('quantite_' . $plat->getId());
+                $libelle = $plat->getLibelle();
+
+                $message .= $libelle . " (Quantité : " . $quantite . ") \n";
+            }
+
+            $message .= "Total : " . $total." € \n";
+            $message .= "\nAdresse de livraison : \n" . $utilisateur->getNom() . " " . $utilisateur->getPrenom() . "\n" . $utilisateur->getAdresse() . ", \n" . $utilisateur->getCp() . ' ' . $utilisateur->getVille();
+            $message .= "\n" . $utilisateur->getTelephone();
+
+            $email = (new Email())
+                ->from($expediteur)
+                ->to($destinataire)
+                ->subject($sujet)
+                ->text($message);
+
+            $mailer->send($email);
+
             $request->getSession()->remove('panier');
-            
+
+            $this->addFlash('success', 'Votre commande a été enregistrée avec succès !');
             return $this->redirectToRoute('app_profil');
         }
 

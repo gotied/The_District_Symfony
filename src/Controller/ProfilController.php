@@ -18,9 +18,11 @@ class ProfilController extends AbstractController
     #[Route('/profil', name: 'app_profil')]
     public function index(CommandeRepository $commande, DetailRepository $detail, PlatRepository $plat, UtilisateurRepository $utilisateur ,Request $request, EntityManagerInterface $entitymanager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $user = $request->getSession()->get('_security.last_username');
-        $userId = $utilisateur->findBy(['email' => $user]);
-        $c = $commande->findBy(['utilisateur' => $userId]);
+        $userID = $utilisateur->findBy(['email' => $user]);
+        $c = $commande->findBy(['utilisateur' => $userID]);
         $d = $detail->findBy(['commande' => $c]);
         $p = $plat->findAll();
 
@@ -36,12 +38,33 @@ class ProfilController extends AbstractController
             }
         }
 
+        if ($request->isMethod('POST')) {
+            $userID = $request->request->get('id_user');
+            $user = $utilisateur->find($userID);
+            $nom = $request->request->get('nom');
+            $prenom = $request->request->get('prenom');
+            $tel = $request->request->get('telephone');
+            $adresse = $request->request->get('adresse');
+            $cp = $request->request->get('cp');
+            $ville = $request->request->get('ville');
+            
+            $user->setNom($nom);
+            $user->setPrenom($prenom);
+            $user->setTelephone($tel);
+            $user->setAdresse($adresse);
+            $user->setCp($cp);
+            $user->setVille($ville);
+
+            $entitymanager->persist($user);
+            $entitymanager->flush();
+        }
+
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
             'commande' => $c,
             'detail' => $d,
             'plat' => $p,
-            'user' => $userId
+            // 'user' => $userId
         ]);
     }
 }

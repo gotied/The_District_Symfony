@@ -168,6 +168,17 @@ input[type="text"] {
 	padding: 10px;
 	width: 100%;
   }
+  input[type="tel"] {
+	background-color: #f2f2f2;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	color: #555;
+	font-size: 14px;
+	font-family: "Trebuchet MS", sans-serif;
+	padding: 10px;
+	width: 100%;
+  }
   input[type="password"] {
 	background-color: #f2f2f2;
 	border: 1px solid #ccc;
@@ -200,6 +211,9 @@ input[type="text"] {
 	border-color: #771133;
   }
   input[type="password"]:hover, textarea:hover {
+	border-color: #771133;
+  }
+  input[type="tel"]:hover, textarea:hover {
 	border-color: #771133;
   }
   label, input[type="text"], textarea {
