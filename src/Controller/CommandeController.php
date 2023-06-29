@@ -64,18 +64,18 @@ class CommandeController extends AbstractController
             $expediteur = 'commande@the_district.fr';
             $destinataire = $utilisateur->getEmail();
             $sujet = 'Commande du ' . $date->format('d-m-Y');
-            $message = "Votre commande : \n";
+            $message = "Votre commande :\n\n";
 
             foreach ($plats as $plat) {
                 $quantite = $request->request->get('quantite_' . $plat->getId());
                 $libelle = $plat->getLibelle();
 
-                $message .= $libelle . " (Quantité : " . $quantite . ") \n";
+                $message .= $libelle . " (Quantité : " . $quantite . ")\n";
             }
 
-            $message .= "Total : " . $total." € \n";
-            $message .= "\nAdresse de livraison : \n" . $utilisateur->getNom() . " " . $utilisateur->getPrenom() . "\n" . $utilisateur->getAdresse() . ", \n" . $utilisateur->getCp() . ' ' . $utilisateur->getVille();
-            $message .= "\n" . $utilisateur->getTelephone();
+            $message .= "Total : " . $total . " €\n";
+            $message .= "\nAdresse de livraison :\n" . $utilisateur->getNom() . " " . $utilisateur->getPrenom() . "\n" . $utilisateur->getAdresse() . ", \n" . $utilisateur->getCp() . ' ' . $utilisateur->getVille();
+            $message .= "\n" . $utilisateur->getTelephone() . "\n\nNous vous tiendrons informés de l'état de votre commande et de sa livraison !\nÀ bientôt sur The District.";
 
             $email = (new Email())
                 ->from($expediteur)
@@ -84,6 +84,36 @@ class CommandeController extends AbstractController
                 ->text($message);
 
             $mailer->send($email);
+
+            $gerantEmail = 'admin@the_district.fr';
+            $gerantSujet = 'Nouvelle commande - Récapitulatif';
+
+            $gerantMessage = "Une nouvelle commande a été passée.\n\n";
+            $gerantMessage .= "Informations de l'utilisateur :\n";
+            $gerantMessage .= "Adresse e-mail : " . $utilisateur->getEmail() . "\n";
+            $gerantMessage .= "Numéro de téléphone : " . $utilisateur->getTelephone() . "\n";
+            $gerantMessage .= "Adresse de livraison :\n";
+            $gerantMessage .= $utilisateur->getNom() . " " . $utilisateur->getPrenom() . "\n";
+            $gerantMessage .= $utilisateur->getAdresse() . "\n";
+            $gerantMessage .= $utilisateur->getCp() . " " . $utilisateur->getVille() . "\n\n";
+
+            $gerantMessage .= "Détails de la commande :\n";
+            foreach ($plats as $plat) {
+                $quantite = $request->request->get('quantite_' . $plat->getId());
+                $libelle = $plat->getLibelle();
+
+                $gerantMessage .= $libelle . " (Quantité : " . $quantite . ")\n";
+            }
+            $gerantMessage .= "Total : " . $total." €";
+
+            $gerantEmail = (new Email())
+                ->from($expediteur)
+                ->to($gerantEmail)
+                ->subject($gerantSujet)
+                ->text($gerantMessage);
+
+            $mailer->send($gerantEmail);
+
 
             $request->getSession()->remove('panier');
 

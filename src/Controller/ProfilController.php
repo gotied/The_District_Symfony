@@ -12,11 +12,13 @@ use App\Repository\PlatRepository;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class ProfilController extends AbstractController
 {
     #[Route('/profil', name: 'app_profil')]
-    public function index(CommandeRepository $commande, DetailRepository $detail, PlatRepository $plat, UtilisateurRepository $utilisateur ,Request $request, EntityManagerInterface $entitymanager): Response
+    public function index(CommandeRepository $commande, DetailRepository $detail, PlatRepository $plat, UtilisateurRepository $utilisateur ,Request $request, EntityManagerInterface $entitymanager, MailerInterface $mailer): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -36,6 +38,7 @@ class ProfilController extends AbstractController
                     $entitymanager->flush();
                 }
             }
+            // envoi de mail annulation commande
         }
 
         if ($request->isMethod('POST')) {
@@ -57,6 +60,21 @@ class ProfilController extends AbstractController
 
             $entitymanager->persist($user);
             $entitymanager->flush();
+
+            $expediteur = 'admin@the_district.fr';
+            $destinataire = $user->getEmail();
+            $sujet = 'Bonjour ' . $user->getPrenom();
+            $message = "Vos nouvelles informations personnelles ont bien été enregistrées !\n\nÀ bientôt sur The District. ";
+
+            $email = (new Email())
+                ->from($expediteur)
+                ->to($destinataire)
+                ->subject($sujet)
+                ->text($message);
+
+            $mailer->send($email);
+
+            // addFlash success new info
         }
 
         return $this->render('profil/index.html.twig', [
