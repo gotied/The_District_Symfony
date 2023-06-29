@@ -81,8 +81,7 @@ class ProfilController extends AbstractController
             'controller_name' => 'ProfilController',
             'commande' => $c,
             'detail' => $d,
-            'plat' => $p,
-            // 'user' => $userId
+            'plat' => $p
         ]);
     }
 }
