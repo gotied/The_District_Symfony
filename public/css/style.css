@@ -23,8 +23,17 @@
 #navbarbot {
     background: #fff url(https://img.freepik.com/photos-gratuite/fond-plancher-texture-bois-beige_53876-129605.jpg?w=2000) center center/contain repeat;
 }
+.card-text {
+    color: #771133; 
+	font-family: "Trebuchet MS", sans-serif;
+	text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
 #card-text {
     color: #771133; 
+	font-family: "Trebuchet MS", sans-serif;
+	text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+.card-title {
 	font-family: "Trebuchet MS", sans-serif;
 	text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
 }
@@ -90,6 +99,23 @@
 }
 #search-bar-style:hover {
 	cursor: grab;
+}
+.card-link {
+	background-color: #771133;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+	text-decoration: none;
+}
+.card-link:hover {
+	background-color: #ff0000;
 }
 #btn-style {
   background-color: #771133;
@@ -279,6 +305,19 @@ input[type="text"] {
 	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
 	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);	
 }
+#card-modification {
+	background: #fff url(https://img.freepik.com/photos-gratuite/texture-papier-carre_23-2147786544.jpg) center center/cover no-repeat;
+	box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);	
+}
+#card-info {
+	background: #fff url(https://img.freepik.com/photos-gratuite/texture-papier-carre_23-2147786544.jpg) center center/cover no-repeat;
+	box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);	
+}
+
 #liste-commande {
 	background-color: #771133;
 	color: #fff;

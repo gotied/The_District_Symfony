@@ -52,7 +52,7 @@
 						{% for p in plat %}
 							<input type="hidden" name="id_plat" value="{{ p.id }}">
 						{% endfor %}
-						{% set etat = 1 %} 
+						{% set etat = 0 %} 
 						<input type="hidden" name="etat" value="{{ etat }}">
 						<input type="hidden" name="date" value="{{ date|date('Y-m-d')}}">
 						<br><label for="total">Total :</label><br>

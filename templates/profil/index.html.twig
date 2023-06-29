@@ -23,7 +23,7 @@
   {{ dump(plat) }}
 </pre> #}
 
-    {% if app.user.nom is null %}
+{% if app.user.nom is null and app.user.prenom is null and app.user.telephone is null and app.user.adresse is null and app.user.cp is null and app.user.ville is null %}
     <div class="d-flex flex-wrap justify-content-center">
         <h3>Veuillez renseigner vos informations personnelles !</h3>
     </div>
@@ -31,9 +31,9 @@
         <img src="/img/3v7fur.png" alt="-_-" style="height: 50px; width: 50px;">
     </div>
     <div class="d-flex flex-wrap justify-content-center">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;" id="card-modification">
             <div class="card-body">
-                <h5 class="card-title">Ajouter vos informations <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" style="margin-bottom: 4px" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/></svg></h5>
+                <h5 class="card-title" id="card-text">Vos informations <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" style="margin-bottom: 4px" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/></svg></h5>
                 {# <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6> #}
                 <p class="card-text">
                     <form action="{{path ('app_profil')}}" method="POST">
@@ -56,67 +56,61 @@
                         <input type="text" id="ville" name="ville" required>
 
                         <input type="hidden" name="id_user" value="{{ app.user.id }}">
-                        <button type="submit" style="margin-top: 10px;">Soumettre <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-bottom: 4px" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16"><path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/></svg></button>
+                        <button type="submit" id="btn-style" style="margin-top: 10px; margin-left: 75px;">Ajouter <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-bottom: 4px" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16"><path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/></svg></button>
                     </form>
                 </p>
             </div>
         </div>
     </div>
-    {% else %}
+{% else %}
     <div class="d-flex flex-wrap justify-content-center">
-        <div class="card" style="width: 18rem; margin-bottom: 5px;">
+        <div class="card" style="width: 18rem; margin-bottom: 10px;" id="card-info">
             <div class="card-body">
                 <h5 class="card-title">Profil <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></svg></h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">Vos informations <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/></svg></h6>
+                <h6 class="card-subtitle mb-2 text-body-secondary" id="card-text">Vos informations <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/></svg></h6>
                 <p class="card-text">{{app.user.nom}} {{app.user.prenom}}<br><br>{{app.user.email}}<br>{{app.user.telephone}}<br><br>{{app.user.adresse}}<br>{{app.user.cp}}<br>{{app.user.ville}}</p>
-                <a href="#" class="card-link">Modifier vos informations</a><br>
+                <a href="#" class="card-link" id="btn-style">Modifier <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/></svg></a><br>
                 {# <a href="#" class="card-link">Modifier votre adresse de livraison</a> #}
             </div>
         </div>
     </div>
-
-  
-  {% for c in commande %}
-  <div class="d-flex flex-wrap justify-content-center">
-   <div class="card" style="width: 18rem; margin-bottom: 5px; margin-top: 5px;">
-  <div class="card-body">
-    <h5 class="card-title">Commande du {{c.getDateCommande().format('d/m/Y')}}</h5>
-    <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
-    <p class="card-text">
-    {% for p in plat %}
-    {% for d in detail %}
-      {% if c.id == d.commande.id %}
-      {% if p.id == d.plat.id %}
-     {{p.libelle}}<br>Quantité : {{d.quantite}}<br><br>
-      {% endif %}
-      {% endif %}
+    {% for c in commande %}
+        <div class="d-flex flex-wrap justify-content-center">
+            <div class="card" style="width: 18rem; margin-bottom: 5px; margin-top: 5px;" id="card-commande">
+                <div class="card-body">
+                    <h5 class="card-title" style="margin-bottom: 15px;">Commande du {{c.getDateCommande().format('d/m/Y')}}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
+                    <p class="card-text">
+                        {% for p in plat %}
+                            {% for d in detail %}
+                                {% if c.id == d.commande.id %}
+                                    {% if p.id == d.plat.id %}
+                                        {{p.libelle}}<br>Quantité : {{d.quantite}}<br><br>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        {{c.total}}€<br>
+                        {% if c.etat == 0 %}Enregistré{% endif %}
+                        {% if c.etat == 1 %}En préparation{% endif %}
+                        {% if c.etat == 2 %}En cours de livraison{% endif %}
+                        {% if c.etat == 3 %}Livrée{% endif %}
+                        {% if c.etat == 4 %}Annulée{% endif %}
+                    </p>
+                    {% if c.etat != 4 and c.etat != 3 %}
+                        <a href="{{ path('app_profil', {'id': c.id, 'etat': 4}) }}" class="card-link">Annuler la commande <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-bottom: 4px" fill="currentColor" class="bi bi-emoji-frown" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/></svg></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     {% endfor %}
-    {% endfor %}
-    {{c.total}}€<br>
-    {% if c.etat == 0 %}Enregistré{% endif %}
-    {% if c.etat == 1 %}En préparation{% endif %}
-    {% if c.etat == 2 %}En cours de livraison{% endif %}
-    {% if c.etat == 3 %}Livrée{% endif %}
-    {% if c.etat == 4 %}Annulée{% endif %}
-    </p>
-    {% if c.etat != 4 and c.etat != 3 %}
-        <a href="{{ path('app_profil', {'id': c.id, 'etat': 4}) }}" class="card-link">Annuler la commande</a>
-    {% endif %}
-  </div>
-</div>
-</div>
-{% endfor %}
+{% endif %}
 
-    {% endif %}
-
-    {% if is_granted('ROLE_ADMIN') %}
+    {# {% if is_granted('ROLE_ADMIN') %}
         <br><h3>admin<h3> 
     {% endif %}
     {% if is_granted('ROLE_SUPER_ADMIN') %}
         <br><h3>super admin</h3>
-    {% endif %}
+    {% endif %} #}
     
-{# {% else %} 
-<p>vous devez vous connecter, pour voir cette page</p>
-{% endif %} #}
 {% endblock %}

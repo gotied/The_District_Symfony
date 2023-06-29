@@ -64,7 +64,7 @@ class ProfilController extends AbstractController
             $expediteur = 'admin@the_district.fr';
             $destinataire = $user->getEmail();
             $sujet = 'Bonjour ' . $user->getPrenom();
-            $message = "Vos nouvelles informations personnelles ont bien été enregistrées !\n\nÀ bientôt sur The District. ";
+            $message = "Vos nouvelles informations personnelles ont bien été enregistrées !". PHP_EOL . PHP_EOL . "À bientôt sur The District. ";
 
             $email = (new Email())
                 ->from($expediteur)
@@ -75,7 +75,9 @@ class ProfilController extends AbstractController
             $mailer->send($email);
 
             // addFlash success new info
-        }
+        }   
+        // update info
+        // addFlash success update info 
 
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',

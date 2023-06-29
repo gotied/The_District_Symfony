@@ -64,18 +64,18 @@ class CommandeController extends AbstractController
             $expediteur = 'commande@the_district.fr';
             $destinataire = $utilisateur->getEmail();
             $sujet = 'Commande du ' . $date->format('d-m-Y');
-            $message = "Votre commande :\n\n";
+            $message = "Votre commande :" . PHP_EOL . PHP_EOL;
 
             foreach ($plats as $plat) {
                 $quantite = $request->request->get('quantite_' . $plat->getId());
                 $libelle = $plat->getLibelle();
 
-                $message .= $libelle . " (Quantité : " . $quantite . ")\n";
+                $message .= $libelle . " (Quantité : " . $quantite . ")" . PHP_EOL;
             }
 
-            $message .= "Total : " . $total . " €\n";
-            $message .= "\nAdresse de livraison :\n" . $utilisateur->getNom() . " " . $utilisateur->getPrenom() . "\n" . $utilisateur->getAdresse() . ", \n" . $utilisateur->getCp() . ' ' . $utilisateur->getVille();
-            $message .= "\n" . $utilisateur->getTelephone() . "\n\nNous vous tiendrons informés de l'état de votre commande et de sa livraison !\nÀ bientôt sur The District.";
+            $message .= "Total : " . $total . " €" . PHP_EOL;
+            $message .= PHP_EOL . "Adresse de livraison :" . PHP_EOL . $utilisateur->getNom() . " " . $utilisateur->getPrenom() . PHP_EOL . $utilisateur->getAdresse() . ", " . PHP_EOL . $utilisateur->getCp() . ' ' . $utilisateur->getVille();
+            $message .= PHP_EOL . $utilisateur->getTelephone() . PHP_EOL . PHP_EOL . "Nous vous tiendrons informés de l'état de votre commande et de sa livraison !" . PHP_EOL . "À bientôt sur The District.";
 
             $email = (new Email())
                 ->from($expediteur)
@@ -88,23 +88,24 @@ class CommandeController extends AbstractController
             $gerantEmail = 'admin@the_district.fr';
             $gerantSujet = 'Nouvelle commande - Récapitulatif';
 
-            $gerantMessage = "Une nouvelle commande a été passée.\n\n";
-            $gerantMessage .= "Informations de l'utilisateur :\n";
-            $gerantMessage .= "Adresse e-mail : " . $utilisateur->getEmail() . "\n";
-            $gerantMessage .= "Numéro de téléphone : " . $utilisateur->getTelephone() . "\n";
-            $gerantMessage .= "Adresse de livraison :\n";
-            $gerantMessage .= $utilisateur->getNom() . " " . $utilisateur->getPrenom() . "\n";
-            $gerantMessage .= $utilisateur->getAdresse() . "\n";
-            $gerantMessage .= $utilisateur->getCp() . " " . $utilisateur->getVille() . "\n\n";
+            $gerantMessage = "Une nouvelle commande a été passée." . PHP_EOL . PHP_EOL;
+            $gerantMessage .= "Informations de l'utilisateur :" . PHP_EOL;
+            $gerantMessage .= "Adresse e-mail : " . $utilisateur->getEmail() . PHP_EOL;
+            $gerantMessage .= "Numéro de téléphone : " . $utilisateur->getTelephone() . PHP_EOL;
+            $gerantMessage .= "Adresse de livraison :" . PHP_EOL;
+            $gerantMessage .= $utilisateur->getNom() . " " . $utilisateur->getPrenom() . PHP_EOL;
+            $gerantMessage .= $utilisateur->getAdresse() . PHP_EOL;
+            $gerantMessage .= $utilisateur->getCp() . " " . $utilisateur->getVille() . PHP_EOL . PHP_EOL;
 
-            $gerantMessage .= "Détails de la commande :\n";
+            $gerantMessage .= "Détails de la commande :" . PHP_EOL;
             foreach ($plats as $plat) {
                 $quantite = $request->request->get('quantite_' . $plat->getId());
                 $libelle = $plat->getLibelle();
 
-                $gerantMessage .= $libelle . " (Quantité : " . $quantite . ")\n";
+                $gerantMessage .= $libelle . " (Quantité : " . $quantite . ")" . PHP_EOL;
             }
-            $gerantMessage .= "Total : " . $total." €";
+
+            $gerantMessage .= "Total : " . $total . " €";
 
             $gerantEmail = (new Email())
                 ->from($expediteur)
