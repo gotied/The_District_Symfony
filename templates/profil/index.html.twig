@@ -10,9 +10,9 @@
     </div>
 {% endfor %}
 
-<pre>
+{# <pre>
     {{ dump(app.user) }}
-</pre>
+</pre> #}
 {# <pre>
     {{ dump(commande) }}
 </pre> #}
@@ -69,8 +69,32 @@
                 <h5 class="card-title">Profil <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/></svg></h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary" id="card-text">Vos informations <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/></svg></h6>
                 <p class="card-text">{{app.user.nom}} {{app.user.prenom}}<br><br>{{app.user.email}}<br>{{app.user.telephone}}<br><br>{{app.user.adresse}}<br>{{app.user.cp}}<br>{{app.user.ville}}</p>
-                <a href="#" class="card-link" id="btn-style">Modifier <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/></svg></a><br>
-                {# <a href="#" class="card-link">Modifier votre adresse de livraison</a> #}
+                <button id="modif-info">Modifier <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/></svg></button>
+                <div id="modif" style="display: none;">
+                <form action="{{path ('app_profil')}}" method="POST">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" required>
+
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" name="prenom" required>
+
+                        <label for="telephone">Téléphone</label>
+                        <input type="tel" id="telephone" name="telephone" required>
+
+                        <label for="adresse">Adresse</label>
+                        <input type="text" id="adresse" name="adresse" required>
+
+                        <label for="cp">Code postal</label>
+                        <input type="text" id="cp" name="cp" required>
+
+                        <label for="ville">Ville</label>
+                        <input type="text" id="ville" name="ville" required>
+
+                        <input type="hidden" name="id_user" value="{{ app.user.id }}">
+                        <button type="submit" id="btn-style" style="margin-top: 10px; margin-left: 75px;">Modifier <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-bottom: 4px" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16"><path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/></svg></button>
+                    </form>
+                </div>
+                <br>
             </div>
         </div>
     </div>
@@ -105,7 +129,11 @@
         </div>
     {% endfor %}
 {% endif %}
-
+<script>
+$('#modif-info').click(function() {
+    $('#modif').toggle();
+  });
+</script>
     {# {% if is_granted('ROLE_ADMIN') %}
         <br><h3>admin<h3> 
     {% endif %}

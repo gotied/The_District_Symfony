@@ -14,11 +14,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use DateTime;
 
 class ProfilController extends AbstractController
 {
     #[Route('/profil', name: 'app_profil')]
-    public function index(CommandeRepository $commande, DetailRepository $detail, PlatRepository $plat, UtilisateurRepository $utilisateur ,Request $request, EntityManagerInterface $entitymanager, MailerInterface $mailer): Response
+    public function index(CommandeRepository $commande, DetailRepository $detail, PlatRepository $plat, UtilisateurRepository $utilisateur, Request $request, EntityManagerInterface $entitymanager, MailerInterface $mailer): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -36,9 +37,37 @@ class ProfilController extends AbstractController
                 if ($commande) {
                     $commande->setEtat($etat);
                     $entitymanager->flush();
+
+                    $expediteur = 'commande@the_district.fr';
+                    $user = $commande->getUtilisateur();
+                    $destinataire = $user->getEmail();
+                    $sujet = 'Commande annulée';
+                    $message = "Nous vous confirmons que votre commande est bien annulée." . PHP_EOL . "À bientôt sur The District.";
+
+                    $email = (new Email())
+                        ->from($expediteur)
+                        ->to($destinataire)
+                        ->subject($sujet)
+                        ->text($message);
+
+                    $mailer->send($email);
+
+                    $gerantEmail = 'admin@the_district.fr';
+                    $gerantSujet = 'Annulation de commande';
+                    $date = new DateTime();
+                    $gerantMessage = "L'utilisateur " . $user->getEmail() . " a annulé sa commande du " . $date->format('d/m/Y H:i:s');
+
+                    $email = (new Email())
+                        ->from($expediteur)
+                        ->to($gerantEmail)
+                        ->subject($gerantSujet)
+                        ->text($gerantMessage);
+
+                    $mailer->send($email);
+
+                    $this->addFlash('success', 'Votre commande a bien été annulée !');
                 }
             }
-            // envoi de mail annulation commande
         }
 
         if ($request->isMethod('POST')) {
@@ -50,7 +79,7 @@ class ProfilController extends AbstractController
             $adresse = $request->request->get('adresse');
             $cp = $request->request->get('cp');
             $ville = $request->request->get('ville');
-            
+
             $user->setNom($nom);
             $user->setPrenom($prenom);
             $user->setTelephone($tel);
@@ -64,7 +93,7 @@ class ProfilController extends AbstractController
             $expediteur = 'admin@the_district.fr';
             $destinataire = $user->getEmail();
             $sujet = 'Bonjour ' . $user->getPrenom();
-            $message = "Vos nouvelles informations personnelles ont bien été enregistrées !". PHP_EOL . PHP_EOL . "À bientôt sur The District. ";
+            $message = "Vos nouvelles informations personnelles ont bien été enregistrées !" . PHP_EOL . PHP_EOL . "À bientôt sur The District. ";
 
             $email = (new Email())
                 ->from($expediteur)
@@ -74,10 +103,8 @@ class ProfilController extends AbstractController
 
             $mailer->send($email);
 
-            // addFlash success new info
-        }   
-        // update info
-        // addFlash success update info 
+            $this->addFlash('success', 'Vos informations ont bien été enregistrées !');
+        }
 
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',

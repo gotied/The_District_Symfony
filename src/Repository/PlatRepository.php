@@ -94,15 +94,30 @@ class PlatRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function Search($searchTerm)
+    {
+        $queryBuilder = $this->createQueryBuilder('p');
+        $queryBuilder
+            ->where($queryBuilder->expr()->like('p.libelle', ':searchTerm'))
+            ->orWhere($queryBuilder->expr()->like('p.description', ':searchTerm'))
+            ->setParameter('searchTerm', '%' . $searchTerm . '%')
+            ->orderBy('p.id', 'ASC');
+        
+        $query = $queryBuilder->getQuery();
+        $result = $query->getResult();
+
+        return $result;
+    }
+
     // public function PlatPanier() 
     // {
     //     $queryBuilder = $this->createQueryBuilder('p');
     //     $queryBuilder->select('pl')
     //        ->from(Plat::class, 'pl');
-    
+
     //     $query = $queryBuilder->getQuery();
     //     $result = $query->getArrayResult();
-    
+
     //     return $result;
     // }
 }
