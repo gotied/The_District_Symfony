@@ -23,7 +23,7 @@ class PlatCrudController extends AbstractCrudController
     {
         yield IdField::new('id')->onlyOnIndex();
         yield TextField::new('libelle');
-        yield TextEditorField::new('description');
+        yield TextField::new('description');
         yield NumberField::new('prix')
             ->setNumDecimals(2)
             ->setFormTypeOption('grouping', true);
