@@ -5,6 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Detail;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class DetailCrudController extends AbstractCrudController
 {
@@ -19,14 +22,11 @@ class DetailCrudController extends AbstractCrudController
             ->setPaginatorPageSize(10);
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        yield IdField::new('id');
+        yield IntegerField::new('quantite');
+        yield AssociationField::new('plat');
+        yield AssociationField::new('commande');
     }
-    */
 }
