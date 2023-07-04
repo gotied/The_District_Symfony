@@ -6,9 +6,12 @@ use App\Repository\PlatRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
+#[ApiResource]
 class Plat
 {
     #[ORM\Id]

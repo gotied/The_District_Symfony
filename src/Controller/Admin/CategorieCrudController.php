@@ -17,11 +17,11 @@ class CategorieCrudController extends AbstractCrudController
         return Categorie::class;
     }
 
-    // public function configureCrud(Crud $crud): Crud
-    // {
-    //     return $crud
-    //         
-    // }
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPaginatorPageSize(10);
+    }
 
     public function configureFields(string $pageName): iterable
     {
