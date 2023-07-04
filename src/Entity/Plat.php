@@ -7,11 +7,15 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+)]
 class Plat
 {
     #[ORM\Id]
@@ -20,22 +24,28 @@ class Plat
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['read'])]
     private ?string $libelle = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['read'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
+    #[Groups(['read'])]
     private ?string $prix = null;
 
     #[ORM\Column(length: 50)]
+    #[Groups(['read', 'write'])]
     private ?string $image = null;
 
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?bool $active = null;
 
     #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: "plats")]
     #[ORM\JoinColumn(name: "categorie_id", referencedColumnName: "id")]
+    #[Groups(['read'])]
     private ?Categorie $categorie;
 
     #[ORM\OneToMany(mappedBy: "plat", targetEntity: Detail::class)]
