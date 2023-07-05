@@ -1,0 +1,42 @@
+# GET http://localhost:8000/api/plats
+
+# PUT http://localhost:8000/api/plats/68 
+# Content-Type: application/json
+
+# {
+#     "libelle": "Pizza Bianca"
+# }
+
+# POST http://localhost:8000/api/plats
+# Content-Type: application/json
+
+# {
+#      "libelle": "Rouleau de printemps",
+#      "description": "Les rouleaux de printemps sont des délices culinaires asiatiques composés d'une enveloppe de riz ou de farine de blé, remplie de légumes frais, de vermicelles de riz et de crevettes ou de poulet. Ils sont servis frais avec une sauce à trempette et sont appréciés pour leur goût léger, frais et croquant.",
+#      "prix": "3.00",
+#      "image": "rouleau-de-printemps.jpeg",
+#      "active": true,
+#      "categorie": "/api/categories/61"
+# }
+
+# POST http://localhost:8000/api/plats
+# Content-Type: application/json
+
+# {
+#     "libelle": "Tacos mexicain",
+#     "description": "Le tacos originel",
+#     "prix": "8.00",
+#     "image": "tacos-mexicain.webp",
+#     "active": true,
+#     "categorie": "/api/categories/64"
+# }
+
+# PATCH http://localhost:8000/api/plats/80
+# Content-Type: application/merge-patch+json
+
+# {
+#     "description": "Le seul, le vrai tacos"
+# }
+
+# DELETE http://localhost:8000/api/plats/78
+# Content-Type: application/json

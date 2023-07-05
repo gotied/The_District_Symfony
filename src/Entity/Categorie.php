@@ -22,7 +22,7 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?string $libelle = null;
 
     #[ORM\Column(length: 50)]
@@ -30,7 +30,7 @@ class Categorie
     private ?string $image = null;
 
     #[ORM\Column]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?bool $active = null;
 
     #[ORM\OneToMany(mappedBy: "categorie", targetEntity: Plat::class)]

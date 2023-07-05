@@ -24,15 +24,15 @@ class Plat
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?string $libelle = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?string $prix = null;
 
     #[ORM\Column(length: 50)]
@@ -40,12 +40,12 @@ class Plat
     private ?string $image = null;
 
     #[ORM\Column]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?bool $active = null;
 
     #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: "plats")]
     #[ORM\JoinColumn(name: "categorie_id", referencedColumnName: "id")]
-    #[Groups(['read'])]
+    #[Groups(['read', 'write'])]
     private ?Categorie $categorie;
 
     #[ORM\OneToMany(mappedBy: "plat", targetEntity: Detail::class)]
