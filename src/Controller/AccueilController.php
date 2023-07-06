@@ -35,4 +35,16 @@ class AccueilController extends AbstractController
             'recherche' => $recherche
         ]);
     }
+
+    #[Route('/pdc', name: 'app_pdc')]
+    public function pdc()
+    {
+        return $this->render('pdc/pdc.html.twig');
+    }
+
+    #[Route('/ml', name: 'app_ml')]
+    public function mc()
+    {
+        return $this->render('ml/ml.html.twig');
+    }
 }

@@ -34,9 +34,9 @@
 <div class="d-flex flex-wrap justify-content-center">
   {% for categorie in top6cat %}
     <div class="card text-bg-dark mt-5 pt-3 px-2 mx-5 col-3" style="width: 24rem; height: 30rem;" id="card-body">
-      <img src="{{asset('img/category/')}}{{ categorie.image }}" class="card-img-top" alt="{{ categorie.libelle }}" height="80%">
+      <img src="{{asset('img/category/')}}{{ categorie.image }}" class="card-img-top" alt="{{ categorie.libelle }}" height="70%">
       <div class="card-body">
-          <h5 class="card-title" id="card-text">{{ categorie.libelle }}</h5>
+          <h5 class="card-title" id="card-text">{{ categorie.libelle }}</h5><br> 
           <a href="{{ path('app_plat', {'id': categorie.id}) }}" id="btn-style" class="btn">Voir les plats</a>
       </div>
     </div>

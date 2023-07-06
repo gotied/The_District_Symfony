@@ -305,6 +305,12 @@ input[type="text"] {
 	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
 	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);	
 }
+#card-contact {
+	background: #fff url(https://img.freepik.com/photos-gratuite/texture-papier-carre_23-2147786544.jpg) center center/cover no-repeat;
+	box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
+	-moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);	
+}
 #card-modification {
 	background: #fff url(https://img.freepik.com/photos-gratuite/texture-papier-carre_23-2147786544.jpg) center center/cover no-repeat;
 	box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.6);
@@ -530,3 +536,24 @@ table, th, td {
 #registration_form_agreeTerms {
 	margin-left: 10px;
 }
+@media screen and (max-width: 560px) {
+	#card-body {
+		width: 20rem !important;
+	}
+}
+@media screen and (max-width: 370px) {
+	#card-body {
+		width: 18rem !important;
+	}
+}
+@media screen and (max-width: 560px) {
+	#card-contact {
+		width: 25rem !important;
+	}
+}
+@media screen and (max-width: 430px) {
+	#card-contact {
+		width: 20rem !important;
+	}
+}
+ 

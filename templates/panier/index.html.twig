@@ -19,14 +19,14 @@
 
 	{% if contenuPanier is empty %}
 		<div class="d-flex flex-wrap justify-content-center">
-			<h3>Votre panier est vide.</h3>
+			<h3 id="titre_h1-2">Votre panier est vide.</h3>
 		</div>	
 		<div class="d-flex flex-wrap justify-content-center"  style="margin-bottom: 500px;">
 			<img src="/img/3v7fur.png" alt="-_-" style="height: 150px; width: 150px; margin-top: 15px;">
 		</div>	
 	{% else %}
 		<div class="d-flex flex-wrap justify-content-center">
-			<h3>Panier</h3>
+			<h3 id="titre_h1-2">Panier</h3>
 		</div>
 		<div class="d-flex flex-wrap justify-content-center">
 			<a href="{{path ('panier_vider')}}" id="btn-style" style="margin-top: 10px;">Vider le panier</a>
@@ -50,22 +50,32 @@
 	</div>
 	
 	{% if contenuPanier is not empty %}
-	{% if app.user %}
-	{% if app.user.nom is null and app.user.prenom is null and app.user.telephone is null and app.user.adresse is null and app.user.cp is null and app.user.ville is null %}
-		<div class="d-flex flex-wrap justify-content-center">
-		<h5>Renseigner d'abord vos informations personnelles !</h5>
-		</div>
-		<div class="d-flex flex-wrap justify-content-center">
-		<a href="{{path ('app_profil')}}" id="btn-style">Profil</a>
-		</div>
-		<div class="d-flex flex-wrap justify-content-center" style="margin-top: 10px;">
-        <img src="/img/3v7fur.png" alt="-_-" style="height: 50px; width: 50px;">
-    	</div>
-	{% else %}
-	<div class="d-flex flex-wrap justify-content-center">
-		<a href="{{path ('app_commande')}}" id="btn-style" class="btn btn-primary">Commander</a>
-	</div>
-	{% endif %}
-	{% endif %}
+		{% if app.user %}
+			{% if app.user.nom is null and app.user.prenom is null and app.user.telephone is null and app.user.adresse is null and app.user.cp is null and app.user.ville is null %}
+				<div class="d-flex flex-wrap justify-content-center">
+					<h5 id="titre_h1-2">Renseigner d'abord vos informations personnelles !</h5>
+				</div>
+				<div class="d-flex flex-wrap justify-content-center">
+					<a href="{{path ('app_profil')}}" id="btn-style">Profil</a>
+				</div>
+				<div class="d-flex flex-wrap justify-content-center" style="margin-top: 10px;">
+					<img src="/img/3v7fur.png" alt="-_-" style="height: 50px; width: 50px;">
+				</div>
+			{% else %}
+				<div class="d-flex flex-wrap justify-content-center">
+					<a href="{{path ('app_commande')}}" id="btn-style" class="btn btn-primary">Commander</a>
+				</div>
+			{% endif %}
+		{% else %}
+			<div class="d-flex flex-wrap justify-content-center">
+				<h5 id="titre_h1-2">Connectez-vous pour commander !</h5>
+			</div>
+			<div class="d-flex flex-wrap justify-content-center">
+				<a href="{{path ('app_login')}}" id="btn-style">Connexion</a>
+			</div>
+			<div class="d-flex flex-wrap justify-content-center" style="margin-top: 10px;">
+					<img src="/img/3v7fur.png" alt="-_-" style="height: 50px; width: 50px;">
+			</div>
+		{% endif %}
 	{% endif %}
 {% endblock %}
