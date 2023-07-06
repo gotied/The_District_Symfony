@@ -43,7 +43,7 @@ class AccueilController extends AbstractController
     }
 
     #[Route('/ml', name: 'app_ml')]
-    public function mc()
+    public function ml()
     {
         return $this->render('ml/ml.html.twig');
     }
