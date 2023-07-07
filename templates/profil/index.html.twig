@@ -22,6 +22,7 @@
 {# <pre>
   {{ dump(plat) }}
 </pre> #}
+
 {% if 'ROLE_ADMIN' in app.user.roles or 'ROLE_SUPER_ADMIN' in app.user.roles %}
     <div class="d-flex flex-wrap justify-content-center">
         <a href="{{path ('app_admin')}}" id="btn-style">Dashboard <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-bottom: 5px;" fill="currentColor" class="bi bi-window" viewBox="0 0 16 16"><path d="M2.5 4a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm1 .5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/><path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2zm13 2v2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zM2 14a1 1 0 0 1-1-1V6h14v7a1 1 0 0 1-1 1H2z"/></svg></a>
@@ -38,7 +39,6 @@
             <div class="card" style="width: 18rem;" id="card-modification">
                 <div class="card-body">
                     <h5 class="card-title" id="card-text">Vos informations <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" style="margin-bottom: 4px" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/></svg></h5>
-                    {# <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6> #}
                     <p class="card-text">
                         <form action="{{path ('app_profil')}}" method="POST">
                             <label for="nom">Nom</label>
@@ -132,18 +132,14 @@
                 </div>
             </div>
         {% endfor %}
+        <div class="d-flex flex-wrap justify-content-center" style="margin-top: 30px;">
+            <a href="{{path ('app_profil', {'id': app.user.id})}}" id="btn-style-2" style="text-decoration: none;">Suppression du compte <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16"><path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/></svg></a>
+        </div>
     {% endif %}
 {% endif %}
 <script>
 $('#modif-info').click(function() {
     $('#modif').toggle();
   });
-</script>
-    {# {% if is_granted('ROLE_ADMIN') %}
-        <br><h3>admin<h3> 
-    {% endif %}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
-        <br><h3>super admin</h3>
-    {% endif %} #}
-    
+</script> 
 {% endblock %}
