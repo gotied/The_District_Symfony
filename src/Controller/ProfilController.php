@@ -14,10 +14,18 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use DateTime;
 
 class ProfilController extends AbstractController
 {
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
+
     #[Route('/profil', name: 'app_profil')]
     public function index(CommandeRepository $commande, DetailRepository $detail, PlatRepository $plat, UtilisateurRepository $utilisateur, Request $request, EntityManagerInterface $entitymanager, MailerInterface $mailer): Response
     {
@@ -80,30 +88,33 @@ class ProfilController extends AbstractController
             $cp = $request->request->get('cp');
             $ville = $request->request->get('ville');
 
-            $user->setNom($nom);
-            $user->setPrenom($prenom);
-            $user->setTelephone($tel);
-            $user->setAdresse($adresse);
-            $user->setCp($cp);
-            $user->setVille($ville);
+            if ($nom !== null && $prenom !== null && $tel !== null && $adresse !== null && $cp !== null && $ville !== null) {
+                $user->setNom($nom);
+                $user->setPrenom($prenom);
+                $user->setTelephone($tel);
+                $user->setAdresse($adresse);
+                $user->setCp($cp);
+                $user->setVille($ville);
 
-            $entitymanager->persist($user);
-            $entitymanager->flush();
+                $entitymanager->persist($user);
+                $entitymanager->flush();
 
-            $expediteur = 'admin@the_district.fr';
-            $destinataire = $user->getEmail();
-            $sujet = 'Bonjour ' . $user->getPrenom();
-            $message = "Vos nouvelles informations personnelles ont bien été enregistrées !" . PHP_EOL . PHP_EOL . "À bientôt sur The District. ";
+                $expediteur = 'profil@the_district.fr';
+                $destinataire = $user->getEmail();
+                $sujet = 'Modification';
+                $message = 'Bonjour ' . $user->getPrenom() . PHP_EOL;
+                $message .= "Vos nouvelles informations personnelles ont bien été enregistrées !" . PHP_EOL . PHP_EOL . "À bientôt sur The District. ";
 
-            $email = (new Email())
-                ->from($expediteur)
-                ->to($destinataire)
-                ->subject($sujet)
-                ->text($message);
+                $email = (new Email())
+                    ->from($expediteur)
+                    ->to($destinataire)
+                    ->subject($sujet)
+                    ->text($message);
 
-            $mailer->send($email);
+                $mailer->send($email);
 
-            $this->addFlash('success', 'Vos informations ont bien été enregistrées !');
+                $this->addFlash('success', 'Vos informations ont bien été enregistrées !');
+            }
         }
 
         if ($request->isMethod('GET')) {
@@ -126,6 +137,37 @@ class ProfilController extends AbstractController
                 $mailer->send($email);
                 
                 $this->addFlash('success', 'Votre demande de suppression de compte a bien été prise en compte.');
+            }
+        }
+
+        if ($request->isMethod('POST')) {
+            $userID = $request->request->get('id_user');
+            $user = $utilisateur->find($userID);
+            $email = $request->request->get('email');
+            $password = $request->request->get('password');
+
+            if ($email !== null && $password !== null) {
+                $user->setEmail($email);
+                $user->setPassword($password, $this->passwordHasher);
+
+                $entitymanager->persist($user);
+                $entitymanager->flush();
+
+                $expediteur = 'profil@the_district.fr';
+                $destinataire = $user->getEmail();
+                $sujet = 'Modification';
+                $message = 'Bonjour ' . $user->getPrenom() . PHP_EOL;
+                $message .= 'Vos modifications ont bien été enregistrées !' . PHP_EOL . PHP_EOL . 'À bientôt sur The District.';
+
+                $email = (new Email())
+                    ->from($expediteur)
+                    ->to($destinataire)
+                    ->subject($sujet)
+                    ->text($message);
+                    
+                $mailer->send($email);
+
+                $this->addFlash('success', 'Vos modifications ont bien été enregistrées !');
             }
         }
 

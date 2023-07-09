@@ -506,6 +506,25 @@ input[type="text"] {
 	font-family: "Trebuchet MS", sans-serif;
 	cursor: pointer;
 }
+#modif-info:hover {
+	background-color: #00a500;
+}
+#modif-email {
+	background-color: #771133;
+	color: #fff;
+	border: none;
+	border-radius: 15px;
+	padding-right: 10px;
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 15px;
+	font-family: "Trebuchet MS", sans-serif;
+	cursor: pointer;
+}
+#modif-email:hover {
+	background-color: #00a500;
+}
 #btn-gestion {
 	background-color: #771133;
 	color: #fff;
