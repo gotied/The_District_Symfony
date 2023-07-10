@@ -21,7 +21,8 @@ class CommandeCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPaginatorPageSize(10);
+            ->setPaginatorPageSize(10)
+            ->setDefaultSort(['date_commande' => 'DESC']);
     }
 
     public function configureFields(string $pageName): iterable

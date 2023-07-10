@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ApiResource(
     normalizationContext: ['groups' => ['read']],
     denormalizationContext: ['groups' => ['write']],
+    security: "is_granted('ROLE_USER')",
 )]
 class Plat
 {

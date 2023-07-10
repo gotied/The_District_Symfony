@@ -10,6 +10,7 @@ use App\Entity\Utilisateur;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -36,7 +37,10 @@ class AdminController extends AbstractDashboardController
         // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
         // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
         //
-         return $this->render('admin/dashboard.html.twig');
+        // return $this->render('admin/dashboard.html.twig');
+
+        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        return $this->redirect($adminUrlGenerator->setController(CommandeCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
@@ -47,7 +51,7 @@ class AdminController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToRoute('Accueil', 'fa fa-home', 'app_accueil');
         yield MenuItem::linkToCrud('Catégorie', 'fas fa-hamburger', Categorie::class);
         yield MenuItem::linkToCrud('Plat', 'fas fa-utensils', Plat::class);
         yield MenuItem::linkToCrud('Commande', 'fas fa-money-check-alt', Commande::class);
