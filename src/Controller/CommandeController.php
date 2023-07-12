@@ -50,7 +50,7 @@ class CommandeController extends AbstractController
 
             foreach ($plats as $plat) {
                 $quantite = $request->request->get('quantite_' . $plat->getId());
-                $idPlat = $plat->getId();
+                $plat->getId();
 
                 $detail = new Detail();
                 $detail->setQuantite($quantite);

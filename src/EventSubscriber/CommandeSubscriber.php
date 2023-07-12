@@ -35,6 +35,7 @@ class CommandeSubscriber implements EventSubscriber
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
+        $entity1 = $args->getObject();
 
         if ($entity instanceof \App\Entity\Detail) {
                 // $user = $entity->getUtilisateur()->getEmail();
@@ -67,17 +68,32 @@ class CommandeSubscriber implements EventSubscriber
                         $user = $c->getUtilisateur()->getEmail();
                         $date = $c->getDateCommande();
                         $total = $c->getTotal();
+                        $nom = $c->getUtilisateur()->getNom();
+                        $prenom = $c->getUtilisateur()->getPrenom();
+                        $tel = $c->getUtilisateur()->getTelephone();
+                        $adresse = $c->getUtilisateur()->getAdresse();
+                        $cp = $c->getUtilisateur()->getCp();
+                        $ville = $c->getUtilisateur()->getVille();
                     }
                 }
+                $message = 'Votre commande :' . PHP_EOL;
                 foreach ($detail as $d) {
                     if ($commandeID === $d->getCommande()->getId()) {
                         $quantite = $d->getQuantite();
                         $libelle = $d->getPlat()->getLibelle();
 
-                        $message = $libelle . ' (Quantité : ' . $quantite . ')' . PHP_EOL; 
+                        $message .= $libelle . ' (Quantité : ' . $quantite . ')' . PHP_EOL; 
                     }
                 }
-
+                $message .= 'total : ' . $total . '€' . PHP_EOL . PHP_EOL;
+                $message .= 'Adresse de livraison : ' . PHP_EOL;
+                $message .= $nom . ' ' . $prenom . PHP_EOL;
+                $message .= $tel . PHP_EOL;
+                $message .= $adresse . PHP_EOL;
+                $message .= $ville . PHP_EOL;
+                $message .= $cp . PHP_EOL . PHP_EOL;
+                $message .= 'À bientôt sur The District.';
+                
                 $email = (new Email())
                     ->from('commande@the_district.fr')
                     ->to($user)
