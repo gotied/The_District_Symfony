@@ -5,8 +5,15 @@ namespace App\Entity;
 use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+    security: "is_granted('ROLE_ADMIN')",
+)]
 class Contact
 {
     #[ORM\Id]
@@ -15,12 +22,15 @@ class Contact
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read'])]
     private ?string $objet = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read'])]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['read'])]
     private ?string $message = null;
 
     public function getId(): ?int

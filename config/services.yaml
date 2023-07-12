@@ -28,6 +28,12 @@ services:
            $mailer: '@Symfony\Component\Mailer\MailerInterface'
        tags:
            - { name: doctrine.event_subscriber }
+
+    App\EventSubscriber\CommandeSubscriber:
+       arguments:
+           $mailer: '@Symfony\Component\Mailer\MailerInterface'
+       tags:
+           - { name: doctrine.event_subscriber }
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     # services.yaml

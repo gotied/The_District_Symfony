@@ -61,59 +61,59 @@ class CommandeController extends AbstractController
             }
             $entityManager->flush();
 
-            $expediteur = 'commande@the_district.fr';
-            $destinataire = $utilisateur->getEmail();
-            $sujet = 'Commande du ' . $date->format('d-m-Y');
-            $message = "Votre commande :" . PHP_EOL . PHP_EOL;
+            // $expediteur = 'commande@the_district.fr';
+            // $destinataire = $utilisateur->getEmail();
+            // $sujet = 'Commande du ' . $date->format('d-m-Y');
+            // $message = "Votre commande :" . PHP_EOL . PHP_EOL;
 
-            foreach ($plats as $plat) {
-                $quantite = $request->request->get('quantite_' . $plat->getId());
-                $libelle = $plat->getLibelle();
+            // foreach ($plats as $plat) {
+            //     $quantite = $request->request->get('quantite_' . $plat->getId());
+            //     $libelle = $plat->getLibelle();
 
-                $message .= $libelle . " (Quantité : " . $quantite . ")" . PHP_EOL;
-            }
+            //     $message .= $libelle . " (Quantité : " . $quantite . ")" . PHP_EOL;
+            // }
 
-            $message .= "Total : " . $total . " €" . PHP_EOL;
-            $message .= PHP_EOL . "Adresse de livraison :" . PHP_EOL . $utilisateur->getNom() . " " . $utilisateur->getPrenom() . PHP_EOL . $utilisateur->getAdresse() . ", " . PHP_EOL . $utilisateur->getCp() . ' ' . $utilisateur->getVille();
-            $message .= PHP_EOL . $utilisateur->getTelephone() . PHP_EOL . PHP_EOL . "Nous vous tiendrons informés de l'état de votre commande et de sa livraison !" . PHP_EOL . "À bientôt sur The District.";
+            // $message .= "Total : " . $total . " €" . PHP_EOL;
+            // $message .= PHP_EOL . "Adresse de livraison :" . PHP_EOL . $utilisateur->getNom() . " " . $utilisateur->getPrenom() . PHP_EOL . $utilisateur->getAdresse() . ", " . PHP_EOL . $utilisateur->getCp() . ' ' . $utilisateur->getVille();
+            // $message .= PHP_EOL . $utilisateur->getTelephone() . PHP_EOL . PHP_EOL . "Nous vous tiendrons informés de l'état de votre commande et de sa livraison !" . PHP_EOL . "À bientôt sur The District.";
 
-            $email = (new Email())
-                ->from($expediteur)
-                ->to($destinataire)
-                ->subject($sujet)
-                ->text($message);
+            // $email = (new Email())
+            //     ->from($expediteur)
+            //     ->to($destinataire)
+            //     ->subject($sujet)
+            //     ->text($message);
 
-            $mailer->send($email);
+            // $mailer->send($email);
 
-            $gerantEmail = 'admin@the_district.fr';
-            $gerantSujet = 'Nouvelle commande - Récapitulatif';
+            // $gerantEmail = 'admin@the_district.fr';
+            // $gerantSujet = 'Nouvelle commande - Récapitulatif';
 
-            $gerantMessage = "Une nouvelle commande a été passée." . PHP_EOL . PHP_EOL;
-            $gerantMessage .= "Informations de l'utilisateur :" . PHP_EOL;
-            $gerantMessage .= "Adresse e-mail : " . $utilisateur->getEmail() . PHP_EOL;
-            $gerantMessage .= "Numéro de téléphone : " . $utilisateur->getTelephone() . PHP_EOL;
-            $gerantMessage .= "Adresse de livraison :" . PHP_EOL;
-            $gerantMessage .= $utilisateur->getNom() . " " . $utilisateur->getPrenom() . PHP_EOL;
-            $gerantMessage .= $utilisateur->getAdresse() . PHP_EOL;
-            $gerantMessage .= $utilisateur->getCp() . " " . $utilisateur->getVille() . PHP_EOL . PHP_EOL;
+            // $gerantMessage = "Une nouvelle commande a été passée." . PHP_EOL . PHP_EOL;
+            // $gerantMessage .= "Informations de l'utilisateur :" . PHP_EOL;
+            // $gerantMessage .= "Adresse e-mail : " . $utilisateur->getEmail() . PHP_EOL;
+            // $gerantMessage .= "Numéro de téléphone : " . $utilisateur->getTelephone() . PHP_EOL;
+            // $gerantMessage .= "Adresse de livraison :" . PHP_EOL;
+            // $gerantMessage .= $utilisateur->getNom() . " " . $utilisateur->getPrenom() . PHP_EOL;
+            // $gerantMessage .= $utilisateur->getAdresse() . PHP_EOL;
+            // $gerantMessage .= $utilisateur->getCp() . " " . $utilisateur->getVille() . PHP_EOL . PHP_EOL;
 
-            $gerantMessage .= "Détails de la commande :" . PHP_EOL;
-            foreach ($plats as $plat) {
-                $quantite = $request->request->get('quantite_' . $plat->getId());
-                $libelle = $plat->getLibelle();
+            // $gerantMessage .= "Détails de la commande :" . PHP_EOL;
+            // foreach ($plats as $plat) {
+            //     $quantite = $request->request->get('quantite_' . $plat->getId());
+            //     $libelle = $plat->getLibelle();
 
-                $gerantMessage .= $libelle . " (Quantité : " . $quantite . ")" . PHP_EOL;
-            }
+            //     $gerantMessage .= $libelle . " (Quantité : " . $quantite . ")" . PHP_EOL;
+            // }
 
-            $gerantMessage .= "Total : " . $total . " €";
+            // $gerantMessage .= "Total : " . $total . " €";
 
-            $gerantEmail = (new Email())
-                ->from($expediteur)
-                ->to($gerantEmail)
-                ->subject($gerantSujet)
-                ->text($gerantMessage);
+            // $gerantEmail = (new Email())
+            //     ->from($expediteur)
+            //     ->to($gerantEmail)
+            //     ->subject($gerantSujet)
+            //     ->text($gerantMessage);
 
-            $mailer->send($gerantEmail);
+            // $mailer->send($gerantEmail);
 
 
             $request->getSession()->remove('panier');
