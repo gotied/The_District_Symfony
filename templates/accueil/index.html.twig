@@ -50,7 +50,7 @@
 <div class="d-flex flex-wrap justify-content-center">
   {% for plat in top3plat %}
     <div class="card text-bg-dark my-5 pt-3 px-2 mx-5 col-3" style="width: 22rem;" id="card-body">
-      <img src="{{asset('img/food/')}}{{plat.image}}" class="card-img-top" alt="{{plat.libelle}}" height="70%">
+      <img src="{{asset('img/food/')}}{{plat.image}}" class="card-img-top" alt="{{plat.libelle}}">
       <div class="card-body">
         <h5 class="card-title" id="card-text">{{plat.libelle}}</h5>
         <p class="card-text" id="card-text">{{ plat.description }}<br><br>{{ plat.prix }} €</p>
