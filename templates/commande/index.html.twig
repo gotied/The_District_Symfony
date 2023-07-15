@@ -27,7 +27,7 @@
 				{% set quantite = panier[p.id] %}
 				{% set totalPrix = p.prix * quantite %}
 				<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 16rem; height: 27rem;" id="card-body2">
-					<img src="{{ asset('img/food/') ~ p.image }}" class="img-fluid card-img-top" alt="{{ p.libelle }}" height="70%">
+					<img src="{{ asset('img/food/') ~ p.image }}" class="img-fluid card-img-top" alt="{{ p.libelle }}">
 					<div class="card-body">
 						<h5 class="card-title" id="card-text">{{ p.libelle }}</h5>
 						<p class="card-text" id="card-text">
@@ -47,7 +47,7 @@
 
 			<div class="card my-5 pt-3 px-2 mx-5 col-3" style="width: 20rem;" id="card-commande">
 				<div class="card-body">
-					<p class="card-text">
+					<p class="card-text" style="margin-bottom: 30px;">
 						*Si vous souhaitez changer d'adresse de livraison <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
 						<a href="{{path ('app_profil')}}" id="btn-style"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 3px;" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16"><path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/></svg></a><br>
 						<input type="hidden" name="id_user" value="{{ app.user.id }}">
@@ -63,24 +63,24 @@
 						</div>
 						<div id="form-f" style="display: none; margin-bottom: 10px;">
 						  <label for="nom">Nom</label>
-                                <input type="text" name="nom" placeholder="{{app.user.nom}}" required>
+                                <input type="text" name="nom" placeholder="{{app.user.nom}}">
 
                                 <label for="prenom">Prénom</label>
-                                <input type="text" name="prenom" placeholder="{{app.user.prenom}}" required>
+                                <input type="text" name="prenom" placeholder="{{app.user.prenom}}">
 
                                 <label for="telephone">Téléphone</label>
-                                <input type="text" name="telephone" placeholder="{{app.user.telephone}}" required>
+                                <input type="text" name="telephone" placeholder="{{app.user.telephone}}">
 
                                 <label for="adresse">Adresse</label>
-                                <input type="text" name="adresse" placeholder="{{app.user.adresse}}" required>
+                                <input type="text" name="adresse" placeholder="{{app.user.adresse}}">
 
                                 <label for="cp">Code postal</label>
-                                <input type="text" name="cp" placeholder="{{app.user.cp}}" required>
+                                <input type="text" name="cp" placeholder="{{app.user.cp}}">
 
                             <label for="ville">Ville</label>
-                            <input type="text" name="ville" placeholder="{{app.user.ville}}" required>
+                            <input type="text" name="ville" placeholder="{{app.user.ville}}">
 						</div>
-						<div class="form-check">
+						<div class="form-check" style="margin-top: 40px;">
 							<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
 							<label class="form-check-label" for="flexRadioDefault2">
 								Carte Bancaire <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="margin-bottom: 4px;" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/><path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/></svg>
@@ -96,8 +96,7 @@
 						<input type="text" id="total" name="total" readonly>
 						<br><br>
 						<input type="hidden" name="_token" value="{{ csrf_token('commande') }}">
-						<input class="btn" type="submit" value="Commander" id="btn-style">
-						<img src="/img/7ry8uq.gif" alt="donne-sous" style="height: 75px; width: 50px;">
+						<button type="submit" id="btn-style">Commander <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="margin-bottom: 5px;" fill="currentColor" class="bi bi-basket" viewBox="0 0 16 16"><path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1v4.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 13.5V9a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h1.217L5.07 1.243a.5.5 0 0 1 .686-.172zM2 9v4.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V9H2zM1 7v1h14V7H1zm3 3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 4 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 6 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 8 10zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 1 .5-.5z"/></svg></button>
 					</p>
 				</div>
 			</div>

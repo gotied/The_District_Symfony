@@ -119,24 +119,26 @@ class ProfilController extends AbstractController
 
         if ($request->isMethod('GET')) {
             $userID = $request->query->get('id');
-    
+
             if ($userID !== null) {
                 $user = $utilisateur->find($userID);
 
-                $expediteur = 'profil@the_district.fr';
-                $destinataire = 'admin@the_district.fr';
-                $sujet = 'Demande de suppression de compte';
-                $message = "L'utilisateur " . $user->getEmail() . " a fait une demande de suppression de compte.";
+                if ($user !== null) {
+                    $expediteur = 'profil@the_district.fr';
+                    $destinataire = 'admin@the_district.fr';
+                    $sujet = 'Demande de suppression de compte';
+                    $message = "L'utilisateur " . $user->getEmail() . " a fait une demande de suppression de compte.";
 
-                $email = (new Email())
-                    ->from($expediteur)
-                    ->to($destinataire)
-                    ->subject($sujet)
-                    ->text($message);
-                    
-                $mailer->send($email);
-                
-                $this->addFlash('success', 'Votre demande de suppression de compte a bien été prise en compte.');
+                    $email = (new Email())
+                        ->from($expediteur)
+                        ->to($destinataire)
+                        ->subject($sujet)
+                        ->text($message);
+
+                    $mailer->send($email);
+
+                    $this->addFlash('success', 'Votre demande de suppression de compte a bien été prise en compte.');
+                }
             }
         }
 
@@ -164,7 +166,7 @@ class ProfilController extends AbstractController
                     ->to($destinataire)
                     ->subject($sujet)
                     ->text($message);
-                    
+
                 $mailer->send($email);
 
                 $this->addFlash('success', 'Vos modifications ont bien été enregistrées !');
