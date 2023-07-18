@@ -14,14 +14,7 @@
     {% endif %}
     {% set maxC = 6 %}
     {% set cat = allcat|slice(minC, maxC) %}
-{# <?php
-$count = 0; 
-foreach ($myPlat as $plat) {
-      if ($plat->id_categorie == $categorie->id) {
-        $count++;
-      }
-    } 
-?> #}
+
     {% for categorie in cat %}
         <div class="card text-bg-dark mt-5 pt-3 px-2 mx-5 col-3" style="width: 24rem; height: 29rem;" id="card-body">
             <img src="{{asset ('img/category/')}}{{ categorie.image }}" class="card-img-top" alt="{{ categorie.libelle }}" height="80%">
